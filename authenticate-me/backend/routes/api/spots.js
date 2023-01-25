@@ -43,7 +43,7 @@ router.get('/:spotId', async(req, res) => {
     res.json(spot);
 });
 
-router.post('/', async(req, res) => {
+router.post('/', requireAuth, async(req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body;
     const newSpot = await Spot.create({
         ownerId: req.user.id,
@@ -62,7 +62,7 @@ router.post('/', async(req, res) => {
     res.json(newSpot);
 });
 
-router.put('/:spotId', async (req, res) => {
+router.put('/:spotId', requireAuth, async (req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
 
     const spot = await Spot.findByPk(req.params.spotId);
@@ -74,7 +74,7 @@ router.put('/:spotId', async (req, res) => {
     res.json(spot);
 });
 
-router.delete('/:spotId', async (req, res) => {
+router.delete('/:spotId', requireAuth, async (req, res) => {
     const spotToDelete = await Spot.findByPk(req.params.spotId);
     await spotToDelete.destroy();
 
