@@ -78,6 +78,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    defaultScope: {
+
+    },
+    scopes: {
+      createSpot: {
+        attributes: { exclude: ["ownerId"]}
+      }
+    }
   });
   return Spot;
 };
