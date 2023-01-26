@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-const { Spot, User } = require('../../db/models');
+const { Spot, User, Review } = require('../../db/models');
 
 const router = express.Router();
 
@@ -28,6 +28,17 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     res.json(spotsByUser);
 });
 
+router.get('/:spotId/reviews', async (req, res) => {
+    const spotReviews = await Review.findAll({
+        where: {
+            spotId: req.params.spotId
+        }
+    });
+
+    res.status(200);
+    res.json(spotReviews);
+});
+
 router.get('/:spotId', async(req, res) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
@@ -42,6 +53,19 @@ router.get('/:spotId', async(req, res) => {
     res.status(200);
     res.json(spot);
 });
+
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    const {review, stars} = req.body;
+    const newSpotReview = await Review.create({
+        spotId: req.params.spotId,
+        userId: req.user.id,
+        review,
+        stars
+    });
+
+    res.status(201);
+    res.json(newSpotReview);
+})
 
 router.post('/', requireAuth, async(req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body;
