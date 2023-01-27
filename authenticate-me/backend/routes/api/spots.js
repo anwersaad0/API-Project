@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-const { Spot, User, Review, Booking } = require('../../db/models');
+const { Spot, User, Review, Booking, SpotImage } = require('../../db/models');
 
 const router = express.Router();
 
@@ -10,7 +10,9 @@ router.get('/', async (req, res) => {
     const spots = await Spot.findAll({});
 
     res.status(200);
-    return res.json(spots);
+    return res.json({
+        Spots: spots
+    });
 });
 
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
@@ -130,7 +132,35 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 
     res.status(201);
     return res.json(newSpotReview);
-})
+});
+
+router.post('/:spotId/images', requireAuth, async(req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
+    }
+
+    if (req.user.id !== spot.ownerId) {
+        res.status(400);
+        return res.json({
+            message: "Cannot add images for a spot you don't own"
+        });
+    }
+    
+    const {url, preview} = req.body;
+    const spotImage = await SpotImage.create({
+        spotId: spot.id,
+        url,
+        preview
+    });
+
+    res.status(200);
+    return res.json(spotImage);
+});
 
 router.post('/', requireAuth, async(req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body;

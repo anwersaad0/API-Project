@@ -18,8 +18,11 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
     const {url} = req.body;
+
+    const review = await Review.findByPk(req.params.reviewId);
+
     const reviewImage = await ReviewImage.create({
-        reviewId: req.params.reviewId,
+        reviewId: review.id,
         url
     });
 
