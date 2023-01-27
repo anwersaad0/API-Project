@@ -6,11 +6,7 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
       // define association here
       Booking.belongsTo(
@@ -39,11 +35,26 @@ module.exports = (sequelize, DataTypes) => {
     },
     endDate: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isBeforeStart(value) {
+          if (value.getTime() <= this.startDate.getTime()) {
+            throw new Error("endDate cannot be on or before startDate");
+          }
+        }
+      }
     }
   }, {
     sequelize,
     modelName: 'Booking',
+    defaultScope: {},
+    scopes: {
+      notTheOwner: {
+        attributes: {
+          exclude: ["id", "userId", "createdAt", "updatedAt"]
+        }
+      }
+    }
   });
   return Booking;
 };

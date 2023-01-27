@@ -6,11 +6,7 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     toSafeObject() {
       const {id, firstName, lastName, username, email} = this;
       return {id, firstName, lastName, username, email};
@@ -71,10 +67,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init({
     firstName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     lastName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     username: {
       type: DataTypes.STRING,

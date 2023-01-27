@@ -13,7 +13,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     });
 
     res.status(200);
-    res.json(revsByUser);
+    return res.json(revsByUser);
 });
 
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
@@ -24,7 +24,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     });
 
     res.status(200);
-    res.json(reviewImage);
+    return res.json(reviewImage);
 });
 
 router.put('/:reviewId', requireAuth, async (req, res) => {
@@ -36,7 +36,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     await reviewEdit.save();
 
     res.status(200);
-    res.json(reviewEdit);
+    return res.json(reviewEdit);
 });
 
 router.delete('/:reviewId', requireAuth, async(req, res) => {
@@ -44,8 +44,9 @@ router.delete('/:reviewId', requireAuth, async(req, res) => {
     await reviewDel.destroy();
 
     res.status(200);
-    res.json({
-        message: "Successfully deleted"
+    return res.json({
+        message: "Successfully deleted",
+        statusCode: 200
     });
 });
 

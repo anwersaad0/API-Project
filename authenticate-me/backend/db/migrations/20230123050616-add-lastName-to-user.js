@@ -10,7 +10,8 @@ options.tableName = 'Users';
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.addColumn(options, 'lastName', {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       }
     );
   },
