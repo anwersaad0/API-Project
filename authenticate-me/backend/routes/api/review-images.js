@@ -22,7 +22,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     });
 
     if (review.userId !== req.user.id) {
-        res.status(400);
+        res.status(403);
         return res.json({
             message: "You do not have authorization to delete this image"
         });

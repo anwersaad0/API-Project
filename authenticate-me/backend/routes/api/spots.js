@@ -1,12 +1,14 @@
 const express = require('express');
 
 const { requireAuth } = require('../../utils/auth');
-const { Spot, User, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
+const { Spot, User, Review, Booking, SpotImage, ReviewImage, Sequelize } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
+
+const Op = Sequelize.Op;
 
 const validateSpot = [
     check('address')
@@ -29,6 +31,8 @@ const validateSpot = [
         .withMessage("Longitude is not valid"),
     check('name')
         .exists({checkFalsy: true})
+        .withMessage("Name is required"),
+    check('name')
         .isLength({max: 50})
         .withMessage("Name must be less than 50 characters"),
     check('description')
@@ -50,14 +54,90 @@ const validateReview = [
     handleValidationErrors
 ];
 
-const validateBooking = [
-    handleValidationErrors
-];
-
 //GET ENDPOINTS
 
 //Get all Spots
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
+    let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
+    let pagination = {};
+
+    let qValErr = new Error("Validation Error")
+    qValErr.status = 400;
+    qValErr.errors = {};
+
+    if (!page) page = 1;
+    if (!size) size = 20;
+
+    if (page > 10) page = 10;
+    if (size > 20) size = 20;
+
+    if (page <= 0 || isNaN(page)) qValErr.errors.page = "Page must be a number greater than or equal to 1";
+    if (size <= 0 || isNaN(size)) qValErr.errors.size = "Size must be a number greater than or equal to 1";
+
+    if (page >= 1 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+
+    if (minLat && isNaN(minLat)) qValErr.errors.minLat = "Minimum latitude is invalid";
+    if (maxLat && isNaN(maxLat)) qValErr.errors.maxLat = "Maximum latitude is invalid";
+    if (minLng && isNaN(minLng)) qValErr.errors.minLng = "Minimum longitude is invalid";
+    if (maxLng && isNaN(maxLng)) qValErr.errors.maxLng = "Maximum longitude is invalid";
+
+    if (minPrice && isNaN(minPrice) || minPrice < 0) qValErr.errors.minPrice = "Minimum price must be a number greater than or equal to 0";
+    if (maxPrice && isNaN(maxPrice) || maxPrice < 0) qValErr.errors.maxPrice = "Maximum price must be a number greater than or equal to 0";
+
+    if (Object.keys(qValErr.errors).length > 0) {
+        return next(qValErr);
+    }
+
+    const qFil = {};
+    qFil.where = {};
+
+    if (minLat && maxLat) {
+        qFil.where.lat = {
+            [Op.between]: [minLat, maxLat]
+        }
+    } else if (minLat) {
+        qFil.where.lat = {
+            [Op.gte]: minLat
+        }
+    } else if (maxLat) {
+        qFil.where.lat = {
+            [Op.lte]: maxLat
+        }
+    }
+
+    if (minLng && maxLng) {
+        qFil.where.lng = {
+            [Op.between]: [minLng, maxLng]
+        }
+    } else if (minLng) {
+        qFil.where.lng = {
+            [Op.gte]: minLng
+        }
+    } else if (maxLng) {
+        qFil.where.lng = {
+            [Op.lte]: maxLng
+        }
+    }
+
+    if (minPrice && maxPrice) {
+        qFil.where.price = {
+            [Op.between]: [minPrice, maxPrice]
+        }
+    } else if (minPrice) {
+        qFil.where.price = {
+            [Op.gte]: minPrice
+        }
+    } else if (maxPrice) {
+        qFil.where.price = {
+            [Op.lte]: maxPrice
+        }
+    }
+
+    //console.log(qFil.where);
+
     const spots = await Spot.findAll({
         include: [
             {
@@ -66,7 +146,9 @@ router.get('/', async (req, res) => {
             {
                 model: SpotImage
             }
-        ]
+        ],
+        where: qFil.where,
+        ...pagination
     });
 
     let spotList = [];
@@ -103,7 +185,9 @@ router.get('/', async (req, res) => {
 
     res.status(200);
     return res.json({
-        Spots: spotList
+        Spots: spotList,
+        page: parseInt(page),
+        size: parseInt(size)
     });
 });
 
