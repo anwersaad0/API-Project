@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Spot.belongsTo(
         models.User,
-        {foreignKey: 'ownerId'}
+        {foreignKey: 'ownerId', as: 'Owner'}
       );
 
       Spot.hasMany(
@@ -65,7 +65,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        max: 50
+      }
     },
     description: {
       type: DataTypes.STRING,
@@ -78,14 +81,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
-    defaultScope: {
-
-    },
-    scopes: {
-      createSpot: {
-        attributes: { exclude: ["ownerId"]}
-      }
-    }
   });
   return Spot;
 };

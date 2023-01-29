@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
+const { requireAuth } = require('../../utils/auth');
 const {SpotImage, Spot} = require('../../db/models');
 
 const router = express.Router();
@@ -23,7 +23,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     });
 
     if (spot.ownerId !== req.user.id) {
-        res.status(400);
+        res.status(403);
         return res.json({
             message: "You do not have authorization to delete this image"
         });
