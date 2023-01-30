@@ -5,15 +5,15 @@ const {SpotImage, Spot} = require('../../db/models');
 
 const router = express.Router();
 
-router.delete('/:imageId', requireAuth, async (req, res) => {
+router.delete('/:imageId', requireAuth, async (req, res, next) => {
 
     const imageDel = await SpotImage.findByPk(req.params.imageId);
     if (!imageDel) {
-        res.status(404);
-        return res.json({
-            message: "Spot Image couldn't be found",
-            statusCode: 404
-        });
+
+        let notFoundErr = new Error("Spot Image couldn't be found");
+        notFoundErr.status = 404;
+
+        return next(notFoundErr);
     }
 
     const spot = await Spot.findOne({
@@ -23,10 +23,11 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     });
 
     if (spot.ownerId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "You do not have authorization to delete this image"
-        });
+
+        let notOwnErr = new Error("Cannot delete an image for another user's spot");
+        notOwnErr.status = 401;
+
+        return next(notOwnErr);
     }
 
     await imageDel.destroy();

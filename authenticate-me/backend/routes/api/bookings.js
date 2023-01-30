@@ -49,29 +49,30 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     const bookingEdit = await Booking.findByPk(req.params.bookingId);
 
     if (!bookingEdit) {
-        res.status(404);
-        return res.json({
-            message: "Booking couldn't be found",
-            statusCode: 404
-        });
+
+        let notFoundErr = new Error("Booking couldn't be found");
+        notFoundErr.status = 404;
+
+        return next(notFoundErr);
     }
     
     if (bookingEdit.userId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "You do not have authorization to edit this booking"
-        });
+
+        let notOwnBkErr = new Error("Cannot edit a booking you do not own");
+        notOwnBkErr.status = 401;
+
+        return next(notOwnBkErr);
     }
 
     const {startDate, endDate} = req.body;
 
     if (bookingEdit.startDate.getTime() <= new Date().getTime() && 
     bookingEdit.endDate.getTime() <= new Date().getTime()) {
-        res.status(403);
-        return res.json({
-            message: "Past bookings can't be modified",
-            statusCode: 403
-        })
+
+        let pastBkErr = new Error("Past bookings can't be modified");
+        pastBkErr.status = 403;
+
+        return next(pastBkErr);
     }
 
     const spot = await Spot.findOne({
@@ -88,10 +89,8 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     let specExBooks = []
     existingBookings.forEach(exBook => {
         if (exBook.toJSON().id !== bookingEdit.id) {
-            //console.log("test");
             specExBooks.push(exBook.toJSON());
         }
-        //console.log(specExBooks);
     });
 
     //Checks booking conflicts
@@ -126,8 +125,6 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             badEnd = true;
             err.errors.endDate = "End date conflicts with an existing booking";
         }
-        //console.log(badStart);
-        //console.log(badEnd);
 
         if ((badStart || badEnd) || (badStart && badEnd)) {
             return next(err);
@@ -145,15 +142,15 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     return res.json(bookingEdit);
 });
 
-router.delete('/:bookingId', requireAuth, async (req, res) => {
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     const bookingDel = await Booking.findByPk(req.params.bookingId);
 
     if (!bookingDel) {
-        res.status(404);
-        return res.json({
-            message: "Booking couldn't be found",
-            statusCode: 404
-        });
+
+        let notFoundErr = new Error("Booking couldn't be found");
+        notFoundErr.status = 404;
+
+        return next(notFoundErr);
     }
 
     const spot = await Spot.findOne({
@@ -163,19 +160,20 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     });
 
     if (bookingDel.userId !== req.user.id && spot.ownerId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "You do not have authorization to delete this booking"
-        });
+
+        let notOwnBkErr = new Error("Cannot delete a booking you do not own");
+        notOwnBkErr.status = 401;
+
+        return next(notOwnBkErr);
     }
 
     if (bookingDel.startDate.getTime() <= new Date().getTime() && 
     new Date().getTime() < bookingDel.endDate.getTime()) {
-        res.status(403);
-        return res.json({
-            message: "Bookings that have been started can't be deleted",
-            statusCode: 403
-        });
+
+        let bkStartErr = new Error("Bookings that have been started can't be deleted");
+        bkStartErr.status = 403;
+
+        return next(bkStartErr);
     }
 
     await bookingDel.destroy();

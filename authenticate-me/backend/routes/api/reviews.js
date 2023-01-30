@@ -70,25 +70,25 @@ router.get('/current', requireAuth, async (req, res) => {
     });
 });
 
-router.post('/:reviewId/images', requireAuth, async (req, res) => {
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     const {url} = req.body;
 
     const review = await Review.findByPk(req.params.reviewId);
 
     if (!review) {
-        res.status(404);
-        return res.json({
-            message: "Review couldn't be found",
-            statusCode: 404
-        });
+
+        let notFoundErr = new Error("Review couldn't be found");
+        notFoundErr.status = 404;
+
+        return next(notFoundErr);
     }
 
     if (review.userId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "You do not have authorization to post an image for this review",
-            statusCode: 403
-        });
+
+        let notOwnRevErr = new Error("Cannot post an image for another user's review");
+        notOwnRevErr.status = 401;
+
+        return next(notOwnRevErr);
     }
 
     const existingImages = await ReviewImage.findAll({
@@ -96,14 +96,13 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
             reviewId: review.id
         }
     });
-    // console.log(existingImages.length);
 
     if (existingImages.length === 10) {
-        res.status(403);
-        return res.json({
-            message: "Maximum number of images for this resource was reached",
-            statusCode: 403
-        });
+
+        let maxRevImgErr = new Error("Maximum number of images for this resource was reached");
+        maxRevImgErr.status = 403;
+
+        return next(maxRevImgErr);
     }
 
     const reviewImage = await ReviewImage.create({
@@ -120,24 +119,24 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     return res.json(specImage);
 });
 
-router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
+router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => {
     const {review, stars} = req.body;
 
     const reviewEdit = await Review.findByPk(req.params.reviewId);
     if (!reviewEdit) {
-        res.status(404);
-        return res.json({
-            message: "Review couldn't be found",
-            statusCode: 404
-        });
+
+        let notFoundErr = new Error("Review couldn't be found");
+        notFoundErr.status = 404;
+
+        return next(notFoundErr);
     }
 
     if (reviewEdit.userId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "You do not have authorization to edit this review",
-            statusCode: 403
-        });
+        
+        let notOwnRevErr = new Error("Cannot edit another user's review");
+        notOwnRevErr.status = 401;
+
+        return next(notOwnRevErr);
     }
 
     reviewEdit.set({review, stars});
@@ -148,22 +147,22 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
     return res.json(reviewEdit);
 });
 
-router.delete('/:reviewId', requireAuth, async(req, res) => {
+router.delete('/:reviewId', requireAuth, async(req, res, next) => {
     const reviewDel = await Review.findByPk(req.params.reviewId);
     if (!reviewDel) {
-        res.status(404);
-        return res.json({
-            message: "Review couldn't be found",
-            statusCode: 404
-        });
+
+        let notFoundErr = new Error("Review couldn't be found");
+        notFoundErr.status = 404;
+
+        return next(notFoundErr);
     }
 
     if (reviewDel.userId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "You do not have authorization to delete this review",
-            statusCode: 403
-        });
+
+        let notOwnRevErr = new Error("Cannot delete another user's review");
+        notOwnRevErr.status = 401;
+
+        return next(notOwnRevErr);
     }
 
     await reviewDel.destroy();

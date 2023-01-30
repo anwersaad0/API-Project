@@ -5,14 +5,14 @@ const {ReviewImage, Review} = require('../../db/models');
 
 const router = express.Router();
 
-router.delete('/:imageId', requireAuth, async (req, res) => {
+router.delete('/:imageId', requireAuth, async (req, res, next) => {
     const imageDel = await ReviewImage.findByPk(req.params.imageId);
     if (!imageDel) {
-        res.status(404);
-        return res.json({
-            message: "Review Image couldn't be found",
-            statusCode: 404
-        });
+
+        let notFoundErr = new Error("Review Image couldn't be found");
+        notFoundErr.status = 404;
+
+        return next(notFoundErr);
     }
 
     const review = await Review.findOne({
@@ -22,10 +22,11 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     });
 
     if (review.userId !== req.user.id) {
-        res.status(403);
-        return res.json({
-            message: "You do not have authorization to delete this image"
-        });
+
+        let notOwnErr = new Error("Cannot delete an image for another user's review");
+        notOwnErr.status = 401;
+
+        return next(notOwnErr);
     }
 
     await imageDel.destroy();
