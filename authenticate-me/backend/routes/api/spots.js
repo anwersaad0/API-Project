@@ -458,7 +458,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
     if (existingReview) {
 
         let hasRevErr = new Error("User already has a review for this spot");
-        hasRevErr.status = 401;
+        hasRevErr.status = 403;
 
         return next(hasRevErr);
     }
