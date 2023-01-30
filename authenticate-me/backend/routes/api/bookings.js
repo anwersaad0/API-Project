@@ -5,6 +5,9 @@ const { Spot, Booking, SpotImage } = require('../../db/models');
 
 const router = express.Router();
 
+const notFoundErr = new Error("Booking couldn't be found");
+notFoundErr.status = 404;
+
 router.get('/current', requireAuth, async (req, res) => {
     const currentBookings = await Booking.findAll({
         where: {
@@ -49,10 +52,6 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     const bookingEdit = await Booking.findByPk(req.params.bookingId);
 
     if (!bookingEdit) {
-
-        let notFoundErr = new Error("Booking couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
     
@@ -146,10 +145,6 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     const bookingDel = await Booking.findByPk(req.params.bookingId);
 
     if (!bookingDel) {
-
-        let notFoundErr = new Error("Booking couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 

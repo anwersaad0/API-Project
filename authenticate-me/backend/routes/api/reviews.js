@@ -18,6 +18,9 @@ const validateReview = [
     handleValidationErrors
 ];
 
+const notFoundErr = new Error("Review couldn't be found");
+notFoundErr.status = 404;
+
 router.get('/current', requireAuth, async (req, res) => {
     const revsByUser = await Review.findAll({
         where: {
@@ -76,10 +79,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     const review = await Review.findByPk(req.params.reviewId);
 
     if (!review) {
-
-        let notFoundErr = new Error("Review couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
@@ -124,10 +123,6 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
 
     const reviewEdit = await Review.findByPk(req.params.reviewId);
     if (!reviewEdit) {
-
-        let notFoundErr = new Error("Review couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
@@ -150,10 +145,6 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
 router.delete('/:reviewId', requireAuth, async(req, res, next) => {
     const reviewDel = await Review.findByPk(req.params.reviewId);
     if (!reviewDel) {
-
-        let notFoundErr = new Error("Review couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 

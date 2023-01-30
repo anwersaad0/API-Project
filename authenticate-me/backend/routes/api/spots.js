@@ -54,6 +54,9 @@ const validateReview = [
     handleValidationErrors
 ];
 
+const notFoundErr = new Error("Spot couldn't be found");
+notFoundErr.status = 404;
+
 //GET ENDPOINTS
 
 //Get all Spots
@@ -247,9 +250,6 @@ router.get('/current', requireAuth, async (req, res) => {
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
-        let notFoundErr = new Error("Spot couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
@@ -288,10 +288,6 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
     if (!spot) {
-
-        let notFoundErr = new Error("Spot couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
@@ -316,7 +312,9 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     });
 
     res.status(200);
-    return res.json(spotReviews);
+    return res.json({
+        Reviews: spotReviews
+    });
 });
 
 //Get a Spot by its id
@@ -343,11 +341,7 @@ router.get('/:spotId', async(req, res, next) => {
     });
 
     if (!spot) {
-        let notFoundErr = new Error("Spot couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
-
     }
 
     //POJO manipulation
@@ -377,10 +371,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
-
-        let notFoundErr = new Error("Spot couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
@@ -455,10 +445,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
-
-        let notFoundErr = new Error("Spot couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
@@ -492,10 +478,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
 router.post('/:spotId/images', requireAuth, async(req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
-
-        let notFoundErr = new Error("Spot couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
@@ -549,16 +531,12 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
     if (!spot) {
-
-        let notFoundErr = new Error("Spot couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
     if (spot.ownerId !== req.user.id) {
 
-        let notOwnSpotErr = new Error("Cannot edit a spot you do not own");
+        let notOwnSpotErr = new Error("Cannot edit a spot you don't own");
         notOwnSpotErr.status = 401;
 
         return next(notOwnSpotErr);
@@ -576,16 +554,12 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     const spotToDelete = await Spot.findByPk(req.params.spotId);
 
     if (!spotToDelete) {
-
-        let notFoundErr = new Error("Spot couldn't be found");
-        notFoundErr.status = 404;
-
         return next(notFoundErr);
     }
 
     if (spotToDelete.ownerId !== req.user.id) {
 
-        let notOwnSpotErr = new Error("Cannot delete a spot you do not own");
+        let notOwnSpotErr = new Error("Cannot delete a spot you don't own");
         notOwnSpotErr.status = 401;
 
         return next(notOwnSpotErr);

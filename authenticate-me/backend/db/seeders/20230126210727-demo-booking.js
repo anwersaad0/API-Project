@@ -27,6 +27,12 @@ module.exports = {
         userId: 1,
         startDate: new Date("2023-03-05"),
         endDate: new Date("2023-03-12")
+      },
+      {
+        spotId: 1,
+        userId: 2,
+        startDate: new Date("2023-10-12"),
+        endDate: new Date("2023-10-14")
       }
     ], {});
   },
@@ -36,7 +42,7 @@ module.exports = {
     const Op = Sequelize.Op;
 
     await queryInterface.bulkDelete(options, {
-      startDate: {[Op.in]: ["2023-02-14", "2023-04-20", "2023-03-05"]}
+      startDate: {[Op.in]: ["2023-02-14", "2023-04-20", "2023-03-05", "2023-10-12"]}
     }, {});
   }
 };
