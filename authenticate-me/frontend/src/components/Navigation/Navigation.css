@@ -1,4 +1,15 @@
-ul {
+.nav-ul {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    border-bottom: 4px solid lightgray;
+    display: flex;
+    justify-content: space-between;
 }
+
+.profile-dropdown-hidden {
+    display: none;
+}
+
+/* .header-button {
+     text-decoration:dashed;
+} */

@@ -12,7 +12,7 @@ module.exports = {
     await queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        url: "Spot 1's preview",
+        url: "https://media.istockphoto.com/id/1159222457/photo/historic-bodiam-castle-and-moat-in-east-sussex.jpg?s=1024x1024&w=is&k=20&c=pauvNt5zWEPZMKN6VW1QtDjA0ME8iWBrp78DMAFDjuc=",
         preview: true
       },
       {
@@ -27,12 +27,12 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: "Spot 2's preview",
+        url: "https://media.istockphoto.com/id/178559422/photo/american-craftsman-house.jpg?s=612x612&w=is&k=20&c=Zks4saOJ3cCkhqZfokihlcSSaJzs8F95-HFcoTvXgpw=",
         preview: true
       },
       {
         spotId: 3,
-        url: "Spot 3's preview",
+        url: "https://media.istockphoto.com/id/1189920127/photo/meteor-crater-natural-landmark-near-winslow-az.jpg?s=612x612&w=is&k=20&c=2aaqY2tiEaI3-XKmAxE5HXxd-j8LqOctHHkOYBXeNa0=",
         preview: true
       },
       {
