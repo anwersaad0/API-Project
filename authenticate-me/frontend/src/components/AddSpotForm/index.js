@@ -169,4 +169,6 @@ const AddSpot = () => {
     )
 }
 
+//TESTING THE BRANCH
+
 export default AddSpot;
