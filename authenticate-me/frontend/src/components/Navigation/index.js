@@ -15,7 +15,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <li className='header-button'>
         <NavLink exact to="/spots/new">Create a Spot</NavLink>
-        <ProfileButton user={sessionUser} />
+        <ProfileButton className="profile-button" user={sessionUser} />
       </li>
     );
   } else {
