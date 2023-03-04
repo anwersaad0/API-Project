@@ -24,7 +24,7 @@ const AllSpots = () => {
                 <div key={spot.id}>
                     <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
                     <Link key={spot.id} to={`/spots/${spot.id}`}>
-                        {spot.name}
+                        {spot.city}, {spot.state}
                     </Link>
                     <p>${spot.price} per Night</p>
                 </div>

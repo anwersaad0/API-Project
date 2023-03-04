@@ -21,9 +21,13 @@ const UserSpots = () => {
                 <div key={spot.id}>
                     <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
                     <Link key={spot.id} to={`/spots/${spot.id}`}>
-                        {spot.name}
+                        {spot.city}, {spot.state}
                     </Link>
                     <p>${spot.price} per Night</p>
+                    <div>
+                        <Link key={spot.id} to={`/spots/${spot.id}/update`}>Update</Link>
+                        <Link key={spot.id}>Delete</Link>
+                    </div>
                 </div>
             ))}
         </div>

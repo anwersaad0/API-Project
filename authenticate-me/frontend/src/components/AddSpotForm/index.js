@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createSpotThunk } from "../../store/spots";
+//import { nanoid } from 'nanoid';
 
 
 const AddSpot = () => {
@@ -24,7 +25,7 @@ const AddSpot = () => {
     const [image4, setImg4] = useState('');
     const [image5, setImg5] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const payload = {
@@ -47,7 +48,8 @@ const AddSpot = () => {
             {url: image5, preview: false},
         ]
 
-        let createdSpot = dispatch(createSpotThunk(payload, newSpotImages));
+        let createdSpot = await dispatch(createSpotThunk(payload, newSpotImages));
+        console.log('spot id: ' + createdSpot.id);
         if (createdSpot) {
             history.push(`/spots/${createdSpot.id}`)
         }

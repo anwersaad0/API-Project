@@ -81,6 +81,18 @@ export const createSpotThunk = (payload, images) => async dispatch => {
     return newSpot;
 }
 
+export const editSpotThunk = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${payload.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    });
+
+    const changedSpot = await response.json();
+    dispatch(addNewSpot(changedSpot));
+    return changedSpot;
+}
+
 const initialState = { allSpots: {}, specSpot: {}, userSpots: {} };
 
 const spotReducer = (state = initialState, action) => {
