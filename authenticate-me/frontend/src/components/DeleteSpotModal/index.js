@@ -1,0 +1,3 @@
+const DeleteSpot = () => {
+    return null;
+}

@@ -11,21 +11,38 @@ const EditSpot = () => {
 
     const prevDetails = useSelector(state => state.spots.specSpot);
 
-    console.log(prevDetails);
+    //console.log(prevDetails);
 
-    const [name, setName] = useState(prevDetails.name);
-    const [address, setAddress] = useState(prevDetails.address);
-    const [city, setCity] = useState(prevDetails.city);
-    const [state, setState] = useState(prevDetails.state);
-    const [country, setCountry] = useState(prevDetails.country);
-    const [price, setPrice] = useState(prevDetails.price);
-    const [description, setDescription] = useState(prevDetails.description);
-    const [lat, setLat] = useState(prevDetails.lat);
-    const [lng, setLng] = useState(prevDetails.lng);
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    const [price, setPrice] = useState(0);
+    const [description, setDescription] = useState('');
+    const [lat, setLat] = useState(0);
+    const [lng, setLng] = useState(0);
 
     useEffect(() => {
-        dispatch(getOneSpotThunk(spotId))
-    }, [dispatch, spotId])
+        const getSpotDets = async () => {
+            await dispatch(getOneSpotThunk(spotId))
+        }
+
+        getSpotDets();
+
+        setName(prevDetails.name);
+        setAddress(prevDetails.address);
+        setCity(prevDetails.city);
+        setState(prevDetails.state);
+        setCountry(prevDetails.country);
+        setPrice(prevDetails.price);
+        setDescription(prevDetails.description);
+        setLat(prevDetails.lat);
+        setLng(prevDetails.lng);
+
+    }, [dispatch, spotId, prevDetails.name, prevDetails.address, prevDetails.city,
+    prevDetails.state, prevDetails.country, prevDetails.price,
+    prevDetails.description, prevDetails.lat, prevDetails.lng]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
