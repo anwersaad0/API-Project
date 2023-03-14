@@ -103,12 +103,11 @@ export const editSpotThunk = (payload) => async dispatch => {
 
 export const removeSpotThunk = (payload) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${payload.id}`, {
-        method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
+        method: 'DELETE'
     })
 
     const delSpot = await response.json();
+    console.log(delSpot);
     dispatch(removeSpot(delSpot));
 }
 
@@ -143,7 +142,9 @@ const spotReducer = (state = initialState, action) => {
             createState.allSpots[action.newSpot.id] = action.newSpot;
             return createState;
         case REMOVE_SPOT:
-            return null;
+            const delState = {...state, allSpots: {...state.allSpots}};
+            delete delState[action.spot.id];
+            return delState;
         default:
             return state;
     }
