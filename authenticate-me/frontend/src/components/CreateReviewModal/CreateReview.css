@@ -1,0 +1,40 @@
+.add-rev-modal {
+    width: 410px;
+    border: 4px solid lightblue;
+    text-align: center;
+}
+
+.add-rev-details {
+    display: inline-block;
+}
+
+.star-input {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-right: 0px;
+    height: 24px;
+}
+
+.star-input .empty {
+    color: lightgray;
+}
+
+.star-input .filled {
+    color: orange;
+}
+
+.star-text {
+    display: flex;
+    margin-right: 6px;
+    margin-top: 0px;
+}
+
+.review-textarea {
+    resize: none;
+}
+
+.submit-review {
+    margin-bottom: 10px;
+}
