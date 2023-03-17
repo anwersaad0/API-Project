@@ -10,6 +10,7 @@
     display: none;
 }
 
-/* .header-button {
-     text-decoration:dashed;
-} */
+.header-button {
+    display: flex;
+    
+}

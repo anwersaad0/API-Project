@@ -1,13 +1,17 @@
+import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { createSpotThunk } from "../../store/spots";
-//import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { editSpotThunk, getOneSpotThunk } from "../../store/spots";
 
-
-const AddSpot = () => {
+const EditSpot = () => {
+    const { spotId } = useParams(); 
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const prevDetails = useSelector(state => state.spots.specSpot);
+
+    //console.log(prevDetails);
 
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
@@ -19,16 +23,32 @@ const AddSpot = () => {
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
 
-    const [prevImage, setPrevImage] = useState('');
-    const [image2, setImg2] = useState('');
-    const [image3, setImg3] = useState('');
-    const [image4, setImg4] = useState('');
-    const [image5, setImg5] = useState('');
+    useEffect(() => {
+        const getSpotDets = async () => {
+            await dispatch(getOneSpotThunk(spotId))
+        }
 
-    const handleSubmit = async (e) => {
+        getSpotDets();
+
+        setName(prevDetails.name);
+        setAddress(prevDetails.address);
+        setCity(prevDetails.city);
+        setState(prevDetails.state);
+        setCountry(prevDetails.country);
+        setPrice(prevDetails.price);
+        setDescription(prevDetails.description);
+        setLat(prevDetails.lat);
+        setLng(prevDetails.lng);
+
+    }, [dispatch, spotId, prevDetails.name, prevDetails.address, prevDetails.city,
+    prevDetails.state, prevDetails.country, prevDetails.price,
+    prevDetails.description, prevDetails.lat, prevDetails.lng]);
+
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         const payload = {
+            id: spotId,
             name,
             address,
             city,
@@ -40,28 +60,18 @@ const AddSpot = () => {
             lng,
         };
 
-        const newSpotImages = [
-            {url: prevImage, preview: true},
-            {url: image2, preview: false},
-            {url: image3, preview: false},
-            {url: image4, preview: false},
-            {url: image5, preview: false},
-        ]
-
-        let createdSpot = await dispatch(createSpotThunk(payload, newSpotImages));
-        console.log('spot id: ' + createdSpot.id);
-        if (createdSpot) {
-            history.push(`/spots/${createdSpot.id}`)
-        }
+        let changedSpot = dispatch(editSpotThunk(payload)).then((changedSpot) => {
+            history.push(`/spots/${changedSpot.id}`)
+        });
+        console.log('spot id: ' + changedSpot.id);
+        
     }
 
     return (
         <section>
-            <form className="create-spot-form" onSubmit={handleSubmit}>
-                <h1>Create a new Spot</h1>
-                <div className="location-details">
-                    <h2>Where's your place located?</h2>
-                    <h3>Guests will only get the exact address once they have booked a reservation.</h3>
+            <form className="edit-spot-form" onSubmit={handleSubmit}>
+                <h1>Update your Spot</h1>
+                <div className="update-location-details">
                     <input
                         type="text"
                         placeholder="Country"
@@ -100,7 +110,7 @@ const AddSpot = () => {
                     />
                 </div>
 
-                <div className="description-field">
+                <div className="update-description-field">
                     <h2>Describe your spot</h2>
                     <input
                         type="text"
@@ -109,8 +119,8 @@ const AddSpot = () => {
                         onChange={e => setDescription(e.target.value)} 
                     />
                 </div>
-                
-                <div className="name-field">
+
+                <div className="update-name-field">
                     <h2>Create a name for your spot</h2>
                     <input
                         type="text"
@@ -120,7 +130,7 @@ const AddSpot = () => {
                     />
                 </div>
                 
-                <div className="price-field">
+                <div className="update-price-field">
                     <h2>Set base price for your spot</h2>
                     <input
                         type="number"
@@ -131,44 +141,10 @@ const AddSpot = () => {
                     />
                 </div>
 
-                <div className="image-field">
-                    <h2>Liven up your spot with photos</h2>
-                    <input 
-                        type="text"
-                        placeholder="Preview Image URL"
-                        value={prevImage}
-                        onChange={e => setPrevImage(e.target.value)} 
-                    />
-                    <input 
-                        type="text"
-                        placeholder="Image URL"
-                        value={image2}
-                        onChange={e => setImg2(e.target.value)} 
-                    />
-                    <input 
-                        type="text"
-                        placeholder="Image URL"
-                        value={image3}
-                        onChange={e => setImg3(e.target.value)}  
-                    />
-                    <input 
-                        type="text"
-                        placeholder="Image URL"
-                        value={image4}
-                        onChange={e => setImg4(e.target.value)} 
-                    />
-                    <input 
-                        type="text"
-                        placeholder="Image URL"
-                        value={image5}
-                        onChange={e => setImg5(e.target.value)} 
-                    />
-                </div>
-                
-                <button type="submit">Create Spot</button>
+                <button type="submit">Update Spot</button>
             </form>
         </section>
     )
 }
 
-export default AddSpot;
+export default EditSpot;

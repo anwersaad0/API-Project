@@ -18,19 +18,19 @@ const GetSpot = () => {
     if (!specSpotObj.SpotImages) return null;
 
     return (
-        <div>
-            <h1>{specSpotObj.name}</h1>
-            <h3>{specSpotObj.city}, {specSpotObj.state}, {specSpotObj.country}</h3>
-            <div>
+        <div key={specSpotObj.id}>
+            <h1 key="spot-name">{specSpotObj.name}</h1>
+            <h3 key="spot-locale">{specSpotObj.city}, {specSpotObj.state}, {specSpotObj.country}</h3>
+            <div key="spot-pics">
                 {specSpotObj.SpotImages.map(image => (
-                    <img className="spot-img" src={image.url} alt="Not Found"></img>
+                    <img key={image.id} className="spot-img" src={image.url} alt="Not Found"></img>
                 ))}
             </div>
-            <div>
+            <div key="spot-owner-details">
                 <h3>Spot hosted by {specSpotObj.Owner.firstName} {specSpotObj.Owner.lastName}</h3>
                 <p>{specSpotObj.description}</p>
             </div>
-            <div>
+            <div key="spot-numbers">
                 <h3>${specSpotObj.price} Night</h3>
                 <h4>Reviews: {specSpotObj.numReviews}</h4>
             </div>

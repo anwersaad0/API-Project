@@ -2,8 +2,9 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_SPOTS = "spots/loadSpots";
 const LOAD_ONE_SPOT = "spots/loadOneSpot";
+const LOAD_USER_SPOTS = "spots/loadUserSpots";
 const CREATE_SPOT = "spots/createSpot";
-//const REMOVE_SPOT = "spots/removeSpot";
+const REMOVE_SPOT = "spots/removeSpot";
 
 const getSpots = (list) => {
     return {
@@ -19,10 +20,24 @@ const getSpecSpot = (spot) => {
     }
 }
 
+const getUserSpots = (list) => {
+    return {
+        type: LOAD_USER_SPOTS,
+        list
+    }
+}
+
 const addNewSpot = (newSpot) => {
     return {
         type: CREATE_SPOT,
         newSpot
+    }
+}
+
+const removeSpot = (spot) => {
+    return {
+        type: REMOVE_SPOT,
+        spot
     }
 }
 
@@ -37,8 +52,16 @@ export const getOneSpotThunk = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
 
     const spotData = await response.json();
-    console.log(spotData);
+    //console.log(spotData);
     dispatch(getSpecSpot(spotData));
+    return spotData;
+}
+
+export const getUserSpotsThunk = () => async dispatch => {
+    const response = await csrfFetch('/api/spots/current');
+
+    const userSpotList = await response.json();
+    dispatch(getUserSpots(userSpotList));
 }
 
 export const createSpotThunk = (payload, images) => async dispatch => {
@@ -66,7 +89,29 @@ export const createSpotThunk = (payload, images) => async dispatch => {
     return newSpot;
 }
 
-const initialState = { allSpots: {}, specSpot: {} };
+export const editSpotThunk = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${payload.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    });
+
+    const changedSpot = await response.json();
+    dispatch(addNewSpot(changedSpot));
+    return changedSpot;
+}
+
+export const removeSpotThunk = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${payload.id}`, {
+        method: 'DELETE'
+    })
+
+    const delSpot = await response.json();
+    console.log(delSpot);
+    dispatch(removeSpot(delSpot));
+}
+
+const initialState = { allSpots: {}, specSpot: {}, userSpots: {} };
 
 const spotReducer = (state = initialState, action) => {
     let newState = {...state};
@@ -77,17 +122,29 @@ const spotReducer = (state = initialState, action) => {
                 allState[spot.id] = spot;
             });
 
-            newState.allSpots = allState
+            newState.allSpots = allState;
             return newState;
         case LOAD_ONE_SPOT:
             const oneState = newState;
             console.log(action.spot);
             oneState.specSpot = action.spot;
             return oneState;
+        case LOAD_USER_SPOTS:
+            const userState = {};
+            action.list.Spots.forEach(spot => {
+                userState[spot.id] = spot;
+            });
+
+            newState.userSpots = userState;
+            return newState;
         case CREATE_SPOT:
             const createState = {...state, allSpots: {...state.allSpots}};
             createState.allSpots[action.newSpot.id] = action.newSpot;
             return createState;
+        case REMOVE_SPOT:
+            const delState = {...state, allSpots: {...state.allSpots}};
+            delete delState[action.spot.id];
+            return delState;
         default:
             return state;
     }
