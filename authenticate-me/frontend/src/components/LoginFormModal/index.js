@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { NavLink } from 'react-router-dom';
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -24,36 +25,61 @@ function LoginFormModal() {
       );
   };
 
+  const demoLogin = (e) => {
+    e.preventDefault();
+    return dispatch(sessionActions.login({ credential: "genericUser", password: "password3"}))
+      .then(closeModal);
+  }
+
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+    <div className="login-div">
+      <h1 className="login-title">Log In</h1>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <ul className="login-errors">
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li className="login-error-text" key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
-          Username or Email
-          <input
-            type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
+
+        <ul className="login-ui">
+          <li className="login-detail">
+            <label>
+              <input
+                type="text"
+                placeholder="Username or Email"
+
+                value={credential}
+                onChange={(e) => setCredential(e.target.value)}
+                required
+              />
+            </label>
+          </li>
+
+          <li className="login-detail">
+            <label>
+              <input
+                type="password"
+                placeholder="Password"
+
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+          </li>
+
+          <li className="login-detail-button">
+            <button className="login-button" type="submit" disabled={(credential.length < 4) || (password.length < 6) ? true : false}>Log In</button>
+          </li>
+
+          <li className="login-detail demo-login">
+            <NavLink className="demo-login-link" exact to='/' onClick={demoLogin}>
+              Demo User
+            </NavLink>
+          </li>
+        </ul>
       </form>
-    </>
+    </div>
   );
 }
 

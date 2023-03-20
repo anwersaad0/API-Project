@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { removeSpotThunk } from "../../store/spots";
 
 
 const DeleteSpot = ({spot}) => {
     const dispatch = useDispatch();
-    //const history = useHistory();
+    const history = useHistory();
     const { closeModal } = useModal();
 
     const handleSubmit = (e) => {
@@ -16,7 +16,9 @@ const DeleteSpot = ({spot}) => {
 
         dispatch(removeSpotThunk(spot))
         
+        history.push('/spots/current');
         window.location.reload(false);
+        
     }
 
     return (

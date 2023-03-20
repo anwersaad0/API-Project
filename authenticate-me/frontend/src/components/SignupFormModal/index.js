@@ -30,69 +30,104 @@ function SignupFormModal() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+    <div className="signup-div">
+      <h1 className="signup-title">Sign Up</h1>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <ul className="signup-errors">
+          {errors.map((error, idx) => <li className="signup-error-text" key={idx}>{error}</li>)}
         </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Sign Up</button>
+
+        <ul className="signup-ui">
+          <li className="signup-detail">
+            <label>
+              <input
+                type="text"
+                placeholder="Email"
+
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+          </li>
+
+          <li className="signup-detail">
+            <label>
+              <input
+                type="text"
+                placeholder="Username"
+
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </label>
+          </li>
+
+          <li className="signup-detail">
+            <label>
+              <input
+                type="text"
+                placeholder="First Name"
+
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </label>
+          </li>
+
+          <li className="signup-detail">
+            <label>
+              <input
+                type="text"
+                placeholder="Last Name"
+
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </label>
+          </li>
+
+          <li className="signup-detail">
+            <label>
+              <input
+                type="password"
+                placeholder="Password"
+
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+          </li>
+
+          <li className="signup-detail">
+            <label>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </label>
+          </li>
+
+          <li className="signup-detail-button">
+            <button 
+              className="signup-button" 
+              type="submit" 
+              disabled={(!email || username.length < 4 || !firstName || !lastName || password.length < 6 || !confirmPassword) || (password !== confirmPassword) ? true : false}
+            >
+              Sign Up
+            </button>
+          </li>
+        </ul>
       </form>
-    </>
+    </div>
   );
 }
 

@@ -32,14 +32,14 @@ const CreateReview = () => {
 
     return (
         <div className="add-rev-modal">
-            <h2>Rate your stay</h2>
+            <h2>How was your stay?</h2>
             <form className="add-rev-details" onSubmit={handleSubmit}>
                 <textarea 
                     className="review-textarea"
                     name="review-text"
                     rows="8"
                     cols="40"
-                    placeholder="Write your review here"
+                    placeholder="Write your review here..."
 
                     value={reviewText}
                     onChange={e => setReviewText(e.target.value)}
@@ -65,7 +65,7 @@ const CreateReview = () => {
                     </div>
                 </div>
 
-                <button className="submit-review" type="submit">Submit Review</button>
+                <button className="submit-review" type="submit" disabled={(reviewText.length < 10 || !rating) ? true : false}>Submit Your Review</button>
             </form>
         </div>
     )
