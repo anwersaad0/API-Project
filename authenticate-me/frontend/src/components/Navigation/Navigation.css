@@ -3,15 +3,19 @@ body {
 }
 
 .nav-ul {
+    min-width: 710px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    border-bottom: 4px solid rgb(161, 206, 111);
-    background-color: rgb(186, 202, 127);
+    border-bottom: 4px solid lightgray;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     right: 0px;
     margin-top: 0px;
+    margin-bottom: 0px;
     padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .nav-li {
@@ -19,7 +23,7 @@ body {
 }
 
 .site-logo {
-    color: teal;
+    color: red;
     font-size: 24px;
     font-style: italic;
     font-weight: bolder;
@@ -32,7 +36,7 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     background-color: white;
-    border: 4px solid rgb(161, 206, 111);
+    border: 4px solid lightgray;
     border-radius:16px;
     position: fixed;
     justify-content: center;
@@ -43,7 +47,7 @@ body {
 }
 
 .header-button {
-    margin: 3px 10px 8px 10px;
+    margin: 3px 0px 8px 10px;
     display: inline-flex;
     justify-content: space-between;
 }
@@ -61,64 +65,36 @@ body {
 .login-button {
     width: 80px;
     height: 32px;
-    background-color: rgb(207, 139, 207);
-    border: 3px solid rgb(179, 123, 179);
+    background-color: white;
+    border: 2px solid rgb(122, 122, 122);
     font-weight: bold;
-    color: rgb(218, 214, 214);
+    color: black;
     border-radius: 14px;
-}
-
-.login-button:hover {
-    background-color: rgb(226, 146, 226);
-    border: 3px solid rgb(192, 124, 192);
-    color: rgb(247, 243, 243);
-}
-
-.login-button:active {
-    background-color: rgb(207, 139, 207);
-    border: 3px solid rgb(192, 124, 192);
 }
 
 .signup-button {
     width: 80px;
     height: 32px;
-    background-color: rgb(137, 121, 209);
-    border: 3px solid rgb(122, 106, 192);
+    background-color: white;
+    border: 2px solid rgb(122, 122, 122);
     font-weight: bold;
-    color: rgb(218, 214, 214);
+    color: black;
     border-radius: 14px;
     margin-left: 10px;
-}
-
-.signup-button:hover {
-    background-color: rgb(128, 107, 219);
-    border: 3px solid rgb(118, 101, 197);
-    color: rgb(247, 243, 243);
-}
-
-.signup-button:active {
-    background-color: rgb(137, 121, 209);
-    border: 3px solid rgb(118, 101, 197);
 }
 
 .profile-button {
     width: 64px;
     height: 32px;
     font-size: 18px;
-    background-color: rgb(207, 139, 207);
-    border: 3px solid rgb(179, 123, 179);
+    background-color: white;
+    border: 2px solid rgb(122, 122, 122);
     border-radius: 14px;
     margin-left: 15px;
 }
 
-.profile-button:hover {
-    background-color: rgb(226, 146, 226);
-    border: 3px solid rgb(192, 124, 192);
-}
-
-.profile-button:active {
-    background-color: rgb(207, 139, 207);
-    border: 3px solid rgb(192, 124, 192);
+.profile-button:hover, .login-button:hover, .signup-button:hover {
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.7);
 }
 
 .profile-content {
@@ -153,8 +129,8 @@ body {
     width: 112px;
     height: 42px;
     margin: 0px 10px 10px 10px;
-    background-color: rgb(231, 93, 42);
-    border: 4px solid rgb(223, 71, 16);
+    background-color: gray;
+    border: 2px solid black;
     border-radius: 8px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -162,11 +138,15 @@ body {
 }
 
 .logout-button:hover {
-    background-color: rgb(243, 83, 25);
+    background-color: rgb(161, 160, 160);
     color: rgb(250, 246, 246);
 }
 
 .logout-button:active {
     background-color: rgb(231, 93, 42);
     color: rgb(236, 233, 233);
+}
+
+.fa-user-circle {
+    margin-left: 4px;
 }

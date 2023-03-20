@@ -14,9 +14,13 @@ const SpotReviews = () => {
     const sessionUser = useSelector(state => state.session.user);
 
     const { spotId } = useParams();
+    const specSpotObj = useSelector(state => state.spots.specSpot);
+
     const spotRevList = useSelector(state => state.reviews);
     const spotRevArr = Object.values(spotRevList);
+    const spotRevArrNewFirst = spotRevArr.reverse();
     
+    let owned = 0;
     let alreadyReviewed = 0;
 
     let delRevBtn;
@@ -28,6 +32,10 @@ const SpotReviews = () => {
         })
     }
 
+    if (specSpotObj.ownerId === sessionUser.id) {
+        owned = 1;
+    }
+
     console.log(spotRevArr);
 
     useEffect(() => {
@@ -35,7 +43,7 @@ const SpotReviews = () => {
     }, [dispatch, spotId]);
 
     let addRevBtn;
-    if (sessionUser && !alreadyReviewed) {
+    if (sessionUser && !alreadyReviewed && !owned) {
         console.log(sessionUser.id)
 
         addRevBtn = (
@@ -46,13 +54,19 @@ const SpotReviews = () => {
         )
     }
 
-    if (!spotRevList) return null;
+    if (!spotRevArr.length) return (
+        <div>
+            {addRevBtn}
+
+            <p>Be the first to post a review!</p>
+        </div>
+    )
 
     return (
         <div>
             {addRevBtn}
 
-            {spotRevList && spotRevArr.map(rev => (
+            {spotRevList && spotRevArrNewFirst.map(rev => (
                 <div key={rev.id}>
                     <p>From: {rev?.User?.firstName}</p>
                     <p>Posted on {rev.createdAt.slice(0, 10)}</p>

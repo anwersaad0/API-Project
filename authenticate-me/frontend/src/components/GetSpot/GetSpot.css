@@ -1,0 +1,5 @@
+.spot-review-stats {
+    max-height: 30px;
+    display: flex;
+    flex-flow: row;
+}

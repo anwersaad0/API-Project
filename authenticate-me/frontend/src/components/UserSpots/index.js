@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getUserSpotsThunk } from "../../store/spots";
 import DeleteSpot from "../DeleteSpotModal";
 import OpenModalButton from "../OpenModalButton";
+import './UserSpots.css';
 
 const UserSpots = () => {
     const userSpotsObj = useSelector(state => state.spots.userSpots);
@@ -15,24 +16,39 @@ const UserSpots = () => {
         dispatch(getUserSpotsThunk());
     }, [dispatch]);
 
-    if (!userSpotsObj) return null;
+    if (!userSpotsArr) return null;
 
     return (
-        <div className="spots-div">
-            {userSpotsObj && userSpotsArr.map(spot => (
-                <div key={spot.id}>
-                    <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
-                    <Link to={`/spots/${spot.id}`}>
-                        {spot.city}, {spot.state}
-                    </Link>
-                    <p>${spot.price} per Night</p>
-                    <div>
-                        <Link to={`/spots/${spot.id}/update`}>Update</Link>
-                        <OpenModalButton buttonText="Delete" modalComponent={<DeleteSpot spot={spot}/>} />
+        <>
+            <div className="main-manage-ui">
+                <h1>Manage Your Spots</h1>
+            </div>
+            <div className="spots-div">
+                {userSpotsObj && userSpotsArr.map(spot => (
+                    <Link title={spot.name} className="spot-preview" key={spot.id} to={`/spots/${spot.id}`}>
+                    <div className="spot-img-div">
+                        <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
                     </div>
-                </div>
-            ))}
-        </div>
+
+                    <div className="details-part-1">
+                        <p>{spot.city}, {spot.state}</p>
+                        
+                        <p><i className="preview-star fas fa-star" />{(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}</p>
+                    </div>
+                    
+                    <div className="details-part-2">
+                        <p className="spot-preview-price-edit">${spot.price} Night</p>
+                        <div className="manage-ui">
+                            <Link className="update-spot-link" to={`/spots/${spot.id}/update`}>Update</Link>
+                            <OpenModalButton buttonClass="delete-spot-modal-button" buttonText="Delete" modalComponent={<DeleteSpot spot={spot}/>} />
+                        </div>
+                    </div>
+                    
+                </Link>
+                ))}
+            </div>
+        </>
+        
     )
 }
 

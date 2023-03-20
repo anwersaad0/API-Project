@@ -1,0 +1,111 @@
+.create-spot-form {
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 440px;
+    min-width: 439px;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 36px;
+}
+
+.create-spot-errors {
+    margin-left: auto;
+    margin-right: auto;
+    color: red;
+}
+
+.location-ui {
+    margin: 20px 0px;
+}
+
+.input-long {
+    width: 410px;
+}
+
+.city-state {
+    display: flex;
+}
+
+.input-city {
+    width: 219px;
+    margin-right: 2px;
+}
+
+.ui-state {
+    margin-left: 8px;
+}
+
+.input-lat {
+    width: 194px;
+    margin-right: 2px;
+}
+
+.ui-lng {
+    margin-left: 8px;
+}
+
+.input-lng {
+    width: 194px;
+}
+
+.input-desc {
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.submit-new-spot {
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.input-name {
+    margin-bottom: 20px;
+}
+
+.ui-price {
+    font-weight: bold;
+}
+
+.input-price {
+    margin-left: 6px;
+    margin-bottom: 20px;
+    width: 398px;
+}
+
+.location-details, .description-field, .name-field, .price-field, .image-field {
+    border-bottom: 4px solid lightgray;
+}
+
+.create-spot-button {
+    width: 140px;
+    height: 32px;
+    background-color: rgb(125, 216, 163);
+    border: 3px solid rgb(115, 197, 149);
+    font-weight: bold;
+    color: rgb(236, 236, 236);
+    border-radius: 14px;
+}
+
+.create-spot-button:hover {
+    background-color: rgb(109, 226, 158);
+    border: 3px solid rgb(103, 199, 143);
+    color: white;
+}
+
+.create-spot-button:active {
+    background-color: rgb(125, 216, 163);
+    border: 3px solid rgb(103, 199, 143);
+    color: rgb(236, 236, 236);
+}
+
+.create-spot-button:disabled, .create-spot-button:disabled:hover {
+    background-color: rgb(139, 207, 167);
+    border: 3px solid rgb(117, 184, 145);
+    color: rgb(236, 236, 236);
+}
