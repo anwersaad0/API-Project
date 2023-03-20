@@ -42,18 +42,18 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button className="profile-button" onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        <li>{user.username}</li>
-        <li>{user.firstName} {user.lastName}</li>
-        <li>{user.email}</li>
-        <li>
-          <NavLink exact to="/spots/current">Manage Spots</NavLink>
+        <li className="profile-content">Hello, {user.username}!</li>
+        <li className="profile-content">Name: {user.firstName} {user.lastName}</li>
+        <li className="profile-content top-divide">Email: {user.email}</li>
+        <li className="profile-content top-divide manage-link-li">
+          <NavLink className="manage-link" exact to="/spots/current">Manage Spots</NavLink>
         </li>
-        <li>
-          <button onClick={logout}>Log Out</button>
+        <li className="logout-li">
+          <button className="logout-button" onClick={logout}>Log Out</button>
         </li>
       </ul>
     </>
