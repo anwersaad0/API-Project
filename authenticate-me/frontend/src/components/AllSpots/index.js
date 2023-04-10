@@ -21,22 +21,19 @@ const AllSpots = () => {
     return (
         <div className="spots-div">
             {spotsObj && spotsArr.map(spot => (
-                <Link title={spot.name} className="spot-preview" key={spot.id} to={`/spots/${spot.id}`}>
-                    <div className="spot-img-div">
+                <div className="spot-preview" key={spot.id} >
+                    <Link title={spot.name} to={`/spots/${spot.id}`} className="spot-img-div">
                         <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
-                    </div>
+                    </Link>
 
                     <div className="details-part-1">
-                        {/* <Link title={spot.name} key={spot.id} to={`/spots/${spot.id}`}>
-                            {spot.city}, {spot.state}
-                        </Link> */}
                         <p>{spot.city}, {spot.state}</p>
                         
                         <p><i className="preview-star fas fa-star" />{(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}</p>
                     </div>
                     
                     <p className="spot-preview-price">${spot.price} Night</p>
-                </Link>
+                </div>
             ))}
         </div>
     )
