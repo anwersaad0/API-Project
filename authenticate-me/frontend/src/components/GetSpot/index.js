@@ -39,7 +39,10 @@ const GetSpot = () => {
                 </div>
 
                 <div>
-                    <img key={specSpotObj.SpotImages[1].id} className="spec-spot-img" src={specSpotObj.SpotImages[1].url} alt="Not Found"></img>
+                    {specSpotObj.SpotImages[1] ? (<img key={specSpotObj.SpotImages[1].id} className="spec-spot-img" src={specSpotObj.SpotImages[1].url} alt="Not Found"></img>) : ""}
+                    {specSpotObj.SpotImages[2] ? (<img key={specSpotObj.SpotImages[2].id} className="spec-spot-img" src={specSpotObj.SpotImages[2].url} alt="Not Found"></img>) : ""}
+                    {specSpotObj.SpotImages[3] ? (<img key={specSpotObj.SpotImages[3].id} className="spec-spot-img" src={specSpotObj.SpotImages[3].url} alt="Not Found"></img>) : ""}
+                    {specSpotObj.SpotImages[4] ? (<img key={specSpotObj.SpotImages[4].id} className="spec-spot-img" src={specSpotObj.SpotImages[4].url} alt="Not Found"></img>) : ""}
                 </div>
             </div>
 

@@ -3,6 +3,10 @@
     margin-left: 25px;
 }
 
+.spot-pics {
+    display: flex;
+}
+
 .spot-review-stats {
     display: flex;
     flex-flow: row;
