@@ -25,26 +25,26 @@ const UserSpots = () => {
             </div>
             <div className="spots-div">
                 {userSpotsObj && userSpotsArr.map(spot => (
-                    <Link title={spot.name} className="spot-preview" key={spot.id} to={`/spots/${spot.id}`}>
-                    <div className="spot-img-div">
-                        <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
-                    </div>
+                    <div className="spot-preview" key={spot.id} >
+                        <Link title={spot.name} className="spot-img-div" to={`/spots/${spot.id}`}>
+                            <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
+                        </Link>
 
-                    <div className="details-part-1">
-                        <p>{spot.city}, {spot.state}</p>
-                        
-                        <p><i className="preview-star fas fa-star" />{(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}</p>
-                    </div>
-                    
-                    <div className="details-part-2">
-                        <p className="spot-preview-price-edit">${spot.price} Night</p>
-                        <div className="manage-ui">
-                            <Link className="update-spot-link" to={`/spots/${spot.id}/update`}>Update</Link>
-                            <OpenModalButton buttonClass="delete-spot-modal-button" buttonText="Delete" modalComponent={<DeleteSpot spot={spot}/>} />
+                        <div className="details-part-1">
+                            <p>{spot.city}, {spot.state}</p>
+                            
+                            <p><i className="preview-star fas fa-star" />{(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}</p>
                         </div>
-                    </div>
+                        
+                        <div className="details-part-2">
+                            <p className="spot-preview-price-edit">${spot.price} Night</p>
+                            <div className="manage-ui">
+                                <Link className="update-spot-link" to={`/spots/${spot.id}/update`}>Update</Link>
+                                <OpenModalButton buttonClass="delete-spot-modal-button" buttonText="Delete" modalComponent={<DeleteSpot spot={spot}/>} />
+                            </div>
+                        </div>
                     
-                </Link>
+                    </div>
                 ))}
             </div>
         </>

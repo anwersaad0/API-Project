@@ -32,7 +32,7 @@ const SpotReviews = () => {
         })
     }
 
-    if (specSpotObj.ownerId === sessionUser.id) {
+    if ((sessionUser) && (specSpotObj.ownerId === sessionUser.id)) {
         owned = 1;
     }
 
@@ -54,7 +54,7 @@ const SpotReviews = () => {
         )
     }
 
-    if (!spotRevArr.length) return (
+    if (!spotRevArr.length && !owned) return (
         <div>
             {addRevBtn}
 
@@ -72,7 +72,7 @@ const SpotReviews = () => {
                     <p>Posted on {rev.createdAt.slice(0, 10)}</p>
                     <p>{rev.review}</p>
 
-                    {(sessionUser) && (rev.userId === sessionUser.id) ? delRevBtn = (<OpenModalButton buttonText="Delete" modalComponent={<DeleteReview rev={rev}/>}/>) : delRevBtn}
+                    {(sessionUser) && (rev.userId === sessionUser.id) ? delRevBtn = (<OpenModalButton buttonText="Delete" modalComponent={<DeleteReview rev={rev}/>}/>) : ""}
                 </div>
             ))}
         </div>
