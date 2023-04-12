@@ -1,18 +1,30 @@
-import { useDispatch } from "react-redux";
+//import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteReviewThunk } from "../../store/reviews";
+import { useHistory } from "react-router-dom";
+import { getOneSpotThunk } from "../../store/spots";
 
 
 const DeleteReview = ({rev}) => {
     const dispatch = useDispatch();
+
+    const history = useHistory();
+
+    const specSpotObj = useSelector(state => state.spots.specSpot);
+
     const { closeModal } = useModal();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        dispatch(deleteReviewThunk(rev));
+        await dispatch(deleteReviewThunk(rev));
 
-        window.location.reload(false);
+        await dispatch(getOneSpotThunk(specSpotObj.id));
+
+        closeModal();
+
+        history.push(`/spots/${specSpotObj.id}`);
     }
 
     return (
