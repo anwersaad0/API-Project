@@ -67,7 +67,7 @@ const SpotReviews = () => {
             {addRevBtn}
 
             {spotRevList && spotRevArrNewFirst.map(rev => (
-                <div key={rev.id}>
+                <div key={rev.id} className="review-div">
                     <p>From: {rev?.User?.firstName}</p>
                     <p>Posted on {rev.createdAt.slice(0, 10)}</p>
                     <p>{rev.review}</p>

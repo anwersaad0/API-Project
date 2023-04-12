@@ -17,17 +17,17 @@ const DeleteSpot = ({spot}) => {
         dispatch(removeSpotThunk(spot))
         
         history.push('/spots/current');
-        window.location.reload(false);
-        
+
+        closeModal();
     }
 
     return (
         <>
             <h2>Confirm Delete?</h2>
             <p>Are you sure you would like to delete this spot from listings?</p>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <button onClick={closeModal}>No</button>
-                <button onClick={handleSubmit}>Yes</button>
+                <button type="submit">Yes</button>
             </form>
         </>
     );

@@ -32,7 +32,7 @@ export const getReviewsThunk = (spotId) => async dispatch => {
     dispatch(getReviews(spotReviewList));
 }
 
-export const createReviewThunk = (spotId, payload) => async dispatch => {
+export const createReviewThunk = (spotId, payload, user) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
@@ -40,6 +40,7 @@ export const createReviewThunk = (spotId, payload) => async dispatch => {
     });
 
     const newReview = await response.json();
+    newReview.User = user;
     console.log(newReview);
     dispatch(createReview(newReview));
     return newReview;
@@ -51,8 +52,8 @@ export const deleteReviewThunk = (payload) => async dispatch => {
     })
 
     const delRev = await response.json();
-
-    dispatch(deleteReview(delRev));
+    console.log(delRev);
+    dispatch(deleteReview(payload));
 }
 
 const initState = {};

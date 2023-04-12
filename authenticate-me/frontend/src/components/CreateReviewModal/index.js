@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { createReviewThunk } from "../../store/reviews";
+import { useModal } from "../../context/Modal";
 import './CreateReview.css';
+import { useHistory } from "react-router-dom";
+import { getOneSpotThunk } from "../../store/spots";
 
 const CreateReview = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const { closeModal } = useModal();
     const specSpotObj = useSelector(state => state.spots.specSpot);
+    const sessionUser = useSelector(state => state.session.user);
 
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
@@ -19,14 +25,12 @@ const CreateReview = () => {
             stars: rating
         }
 
-        console.log(reviewText);
-        console.log(rating);
-
-        let createdReview = await dispatch(createReviewThunk(specSpotObj.id, payload));
-        console.log(createdReview.id);
+        let createdReview = await dispatch(createReviewThunk(specSpotObj.id, payload, sessionUser));
+        await dispatch(getOneSpotThunk(specSpotObj.id));
 
         if (createdReview) {
-            window.location.reload(false);
+            closeModal();
+            history.push(`/spots/${specSpotObj.id}`);
         }
     }
 

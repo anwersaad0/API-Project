@@ -62,6 +62,7 @@ export const getUserSpotsThunk = () => async dispatch => {
 
     const userSpotList = await response.json();
     dispatch(getUserSpots(userSpotList));
+    return userSpotList;
 }
 
 export const createSpotThunk = (payload, images) => async dispatch => {
@@ -102,13 +103,14 @@ export const editSpotThunk = (payload) => async dispatch => {
 }
 
 export const removeSpotThunk = (payload) => async dispatch => {
+    console.log('the payload', payload);
     const response = await csrfFetch(`/api/spots/${payload.id}`, {
         method: 'DELETE'
     })
 
     const delSpot = await response.json();
-    console.log(delSpot);
-    dispatch(removeSpot(delSpot));
+    console.log('delSpot from removeSpotThunk', delSpot);
+    dispatch(removeSpot(payload));
 }
 
 const initialState = { allSpots: {}, specSpot: {}, userSpots: {} };
@@ -142,8 +144,9 @@ const spotReducer = (state = initialState, action) => {
             createState.allSpots[action.newSpot.id] = action.newSpot;
             return createState;
         case REMOVE_SPOT:
-            const delState = {...state, allSpots: {...state.allSpots}};
-            delete delState[action.spot.id];
+            const delState = {...state, allSpots: {...state.allSpots}, userSpots: {...state.userSpots}};
+            delete delState.allSpots[action.spot.id];
+            delete delState.userSpots[action.spot.id];
             return delState;
         default:
             return state;
