@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import { deleteReviewThunk } from "../../store/reviews";
 import { useHistory } from "react-router-dom";
 import { getOneSpotThunk } from "../../store/spots";
+import './DeleteReviewModal.css';
 
 
 const DeleteReview = ({rev}) => {
@@ -28,14 +29,14 @@ const DeleteReview = ({rev}) => {
     }
 
     return (
-        <>
-            <h2>Confirm Delete?</h2>
+        <div className="delete-modal">
+            <h2 className="confirm-title">Confirm Delete?</h2>
             <p>Are you sure you would like to delete this review?</p>
             <form>
-                <button onClick={closeModal}>No</button>
-                <button onClick={handleSubmit}>Yes</button>
+                <div><button className="confirm-delete" onClick={handleSubmit}>Yes (Delete Review)</button></div>
+                <div><button className="decline-delete" onClick={closeModal}>No (Keep Review)</button></div>
             </form>
-        </>
+        </div>
     )
 }
 

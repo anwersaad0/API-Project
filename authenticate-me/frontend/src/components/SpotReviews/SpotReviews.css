@@ -1,5 +1,43 @@
 .add-review-btn {
-    height: 80px;
-    width: 180px;
-    background-color: greenyellow;
+    height: 36px;
+    width: 154px;
+    background-color: rgb(92, 224, 87);
+    border: none;
+    border-radius: 14px;
+    border-bottom: 2px solid gray;
+}
+
+.add-review-btn:hover {
+    background-color: rgb(70, 238, 64);
+}
+
+.add-review-btn:active {
+    background-color: rgb(92, 224, 87);
+}
+
+.delete-review {
+    width: 64px;
+    height: 24px;
+    background-color: rgb(230, 45, 45);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    border-bottom: 2px solid gray;
+    margin-bottom: 4px;
+}
+
+.delete-review:hover {
+    background-color: rgb(250, 43, 43);
+}
+
+.delete-review:active {
+    background-color: rgb(230, 45, 45);
+}
+
+.review-div {
+    border-bottom: 2px solid lightgray;
+}
+
+.reviewer-name {
+    font-weight: bold;
 }
