@@ -5,7 +5,7 @@ import { getReviewsThunk } from "../../store/reviews";
 import CreateReview from "../CreateReviewModal";
 import DeleteReview from "../DeleteReviewModal";
 import OpenModalButton from "../OpenModalButton";
-
+import './SpotReviews.css';
 
 
 const SpotReviews = () => {
@@ -48,6 +48,7 @@ const SpotReviews = () => {
 
         addRevBtn = (
             <OpenModalButton 
+                className="add-review-btn"
                 buttonText="Post Your Review"
                 modalComponent={<CreateReview />}
             />

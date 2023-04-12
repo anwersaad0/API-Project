@@ -35,10 +35,10 @@ const GetSpot = () => {
                 </div>
 
                 <div className="side-images-div">
-                    <div>{specSpotObj.SpotImages[1] ? (<img key={specSpotObj.SpotImages[1].id} className="spec-spot-img side-img" src={specSpotObj.SpotImages[1].url} alt="Not Found"></img>) : ""}</div>
-                    <div>{specSpotObj.SpotImages[2] ? (<img key={specSpotObj.SpotImages[2].id} className="spec-spot-img side-img" src={specSpotObj.SpotImages[2].url} alt="Not Found"></img>) : ""}</div>
-                    <div>{specSpotObj.SpotImages[3] ? (<img key={specSpotObj.SpotImages[3].id} className="spec-spot-img side-img" src={specSpotObj.SpotImages[3].url} alt="Not Found"></img>) : ""}</div>
-                    <div>{specSpotObj.SpotImages[4] ? (<img key={specSpotObj.SpotImages[4].id} className="spec-spot-img side-img" src={specSpotObj.SpotImages[4].url} alt="Not Found"></img>) : ""}</div>
+                    <div>{specSpotObj.SpotImages[1] ? (<img key={specSpotObj.SpotImages[1].id} className="spec-spot-img side-img img-2" src={specSpotObj.SpotImages[1].url} alt="Not Found"></img>) : ""}</div>
+                    <div>{specSpotObj.SpotImages[2] ? (<img key={specSpotObj.SpotImages[2].id} className="spec-spot-img side-img img-3" src={specSpotObj.SpotImages[2].url} alt="Not Found"></img>) : ""}</div>
+                    <div>{specSpotObj.SpotImages[3] ? (<img key={specSpotObj.SpotImages[3].id} className="spec-spot-img side-img img-4" src={specSpotObj.SpotImages[3].url} alt="Not Found"></img>) : ""}</div>
+                    <div>{specSpotObj.SpotImages[4] ? (<img key={specSpotObj.SpotImages[4].id} className="spec-spot-img side-img img-5" src={specSpotObj.SpotImages[4].url} alt="Not Found"></img>) : ""}</div>
                 </div>
             </div>
 
@@ -51,8 +51,11 @@ const GetSpot = () => {
                 <div className="reserve-div">
                     <div className="reserve-details">
                         <h3>${specSpotObj.price} Night</h3>
-                        <h3><i className="preview-star fas fa-star" />{(specSpotObj.avgStarRating) ? specSpotObj.avgStarRating.toFixed(1) : "New"}</h3>
-                        <h3 className="rev-count-h3">{(specSpotObj.numReviews) ? (<h3 className="center-dot">&bull;</h3>) : ""} {(specSpotObj.numReviews > 1) ? `${specSpotObj.numReviews} Reviews` : (specSpotObj.numReviews === 1) ? `${specSpotObj.numReviews} Review` : ""}</h3>
+
+                        <div className="reserve-ratings">
+                            <h3><i className="preview-star fas fa-star" />{(specSpotObj.avgStarRating) ? specSpotObj.avgStarRating.toFixed(1) : "New"}</h3>
+                            <h3 className="rev-count-h3">{(specSpotObj.numReviews) ? (<h3 className="center-dot">&bull;</h3>) : ""} {(specSpotObj.numReviews > 1) ? `${specSpotObj.numReviews} Reviews` : (specSpotObj.numReviews === 1) ? `${specSpotObj.numReviews} Review` : ""}</h3>
+                        </div>
                     </div>
 
                     <div className="reserve-button-div">
