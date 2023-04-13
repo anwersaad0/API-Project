@@ -22,14 +22,14 @@ const DeleteSpot = ({spot}) => {
     }
 
     return (
-        <>
-            <h2>Confirm Delete?</h2>
+        <div className="delete-modal">
+            <h2 className="confirm-title">Confirm Delete?</h2>
             <p>Are you sure you would like to delete this spot from listings?</p>
             <form onSubmit={handleSubmit}>
-                <button onClick={closeModal}>No</button>
-                <button type="submit">Yes</button>
+                <div><button className="confirm-delete" type="submit">Yes (Delete Spot)</button></div>
+                <div><button className="decline-delete" onClick={closeModal}>No (Keep Spot)</button></div>
             </form>
-        </>
+        </div>
     );
 }
 

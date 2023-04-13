@@ -48,7 +48,7 @@ const SpotReviews = () => {
 
         addRevBtn = (
             <OpenModalButton 
-                className="add-review-btn"
+                buttonClass="add-review-btn"
                 buttonText="Post Your Review"
                 modalComponent={<CreateReview />}
             />
@@ -69,11 +69,11 @@ const SpotReviews = () => {
 
             {spotRevList && spotRevArrNewFirst.map(rev => (
                 <div key={rev.id} className="review-div">
-                    <p>From: {rev?.User?.firstName}</p>
+                    <p className="reviewer-name">From: {rev?.User?.firstName}</p>
                     <p>Posted on {rev.createdAt.slice(0, 10)}</p>
                     <p>{rev.review}</p>
 
-                    {(sessionUser) && (rev.userId === sessionUser.id) ? delRevBtn = (<OpenModalButton buttonText="Delete" modalComponent={<DeleteReview rev={rev}/>}/>) : ""}
+                    {(sessionUser) && (rev.userId === sessionUser.id) ? delRevBtn = (<OpenModalButton buttonClass="delete-review" buttonText="Delete" modalComponent={<DeleteReview rev={rev}/>}/>) : ""}
                 </div>
             ))}
         </div>
