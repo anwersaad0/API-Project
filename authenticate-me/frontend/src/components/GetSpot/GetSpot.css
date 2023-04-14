@@ -83,7 +83,7 @@
 
 .reserve-ratings {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     width: 180px;
     padding-right: 0px;
 }

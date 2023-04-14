@@ -130,7 +130,8 @@ body {
     height: 42px;
     margin: 0px 10px 10px 10px;
     background-color: gray;
-    border: 2px solid black;
+    border: none;
+    border-bottom: 2px solid black;
     border-radius: 8px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
