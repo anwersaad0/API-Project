@@ -20,7 +20,9 @@
 .delete-spot-modal-button {
     margin-left: 8px;
     background-color: darkgray;
-    border: 1px solid black;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 6px;
     color: white;
     width: 68px;
 }
@@ -32,7 +34,12 @@
     padding: 1px 10px;
     margin-left: 8px;
     background-color: darkgray;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
+    border-radius: 6px;
     color: white;
     width: 68px;
+}
+
+.update-spot-link:hover, .delete-spot-modal-button:hover {
+    background-color: rgb(187, 186, 186);
 }

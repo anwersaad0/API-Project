@@ -86,26 +86,22 @@
     width: 140px;
     height: 32px;
     background-color: rgb(125, 216, 163);
-    border: 3px solid rgb(115, 197, 149);
+    border: none;
+    border-bottom: 3px solid rgb(115, 197, 149);
     font-weight: bold;
-    color: rgb(236, 236, 236);
+    color: white;
     border-radius: 14px;
 }
 
 .create-spot-button:hover {
     background-color: rgb(109, 226, 158);
-    border: 3px solid rgb(103, 199, 143);
-    color: white;
 }
 
 .create-spot-button:active {
     background-color: rgb(125, 216, 163);
-    border: 3px solid rgb(103, 199, 143);
-    color: rgb(236, 236, 236);
 }
 
 .create-spot-button:disabled, .create-spot-button:disabled:hover {
-    background-color: rgb(139, 207, 167);
-    border: 3px solid rgb(117, 184, 145);
-    color: rgb(236, 236, 236);
+    background-color: rgb(154, 167, 159);
+    border-bottom: 3px solid rgb(88, 95, 91);
 }
