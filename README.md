@@ -1,14 +1,14 @@
-# API-Project
-API/backend project for App Academy
+
+# AyyBnE
+
+## Main Page
+![Screenshot 2023-06-07 141914](https://github.com/anwersaad0/API-Project/assets/80143838/454ceead-8960-4408-b611-29a98b2bdaba)
 
 
-# About the Project
-
+## Spot Page
 ![Screenshot 2023-04-17 075541](https://user-images.githubusercontent.com/80143838/232524401-4dc2b202-1aa5-47c4-96b4-142ade8bff5d.png)
 
-My API Project, also named AyyBnE on its site, is made to present my knowledge of full stack development, featuring a working database in the backend as well as a functional and presentable frontend to work with it. The back and front ends are made using SQL and React respectively.
-
-# Getting Started
+### Getting Started
 
 To run on the Render server, simply follow this link: https://saads-auth-me.onrender.com
 
