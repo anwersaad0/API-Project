@@ -88,3 +88,19 @@
 .spot-preview-price {
     margin-left: 10px;
 }
+
+.ayybne-footer {
+    justify-content: center;
+    text-align: center;
+}
+
+.contributor {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(173, 85, 111);
+}
+
+.contributor:hover {
+    text-decoration: underline;
+}

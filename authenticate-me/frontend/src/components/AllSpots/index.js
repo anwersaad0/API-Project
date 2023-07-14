@@ -19,22 +19,28 @@ const AllSpots = () => {
     if (!spotsObj) return null;
 
     return (
-        <div className="spots-div">
-            {spotsObj && spotsArr.map(spot => (
-                <div className="spot-preview" key={spot.id} >
-                    <Link title={spot.name} to={`/spots/${spot.id}`} className="spot-img-div">
-                        <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
-                    </Link>
+        <div>
+            <div className="spots-div">
+                {spotsObj && spotsArr.map(spot => (
+                    <div className="spot-preview" key={spot.id} >
+                        <Link title={spot.name} to={`/spots/${spot.id}`} className="spot-img-div">
+                            <img className="spot-img" src={spot.previewImage} alt="A Spot Pic"></img>
+                        </Link>
 
-                    <div className="details-part-1">
-                        <p>{spot.city}, {spot.state}</p>
+                        <div className="details-part-1">
+                            <p>{spot.city}, {spot.state}</p>
+                            
+                            <p><i className="preview-star fas fa-star" />{(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}</p>
+                        </div>
                         
-                        <p><i className="preview-star fas fa-star" />{(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}</p>
+                        <p className="spot-preview-price">${spot.price} Night</p>
                     </div>
-                    
-                    <p className="spot-preview-price">${spot.price} Night</p>
-                </div>
-            ))}
+                ))}
+            </div>
+
+            <footer className="ayybne-footer">
+                <a className="contributor" href="https://github.com/anwersaad0">Made by Saad Anwer</a>
+            </footer>
         </div>
     )
 }
