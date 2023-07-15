@@ -90,15 +90,27 @@
 }
 
 .ayybne-footer {
+    display: flex;
     justify-content: center;
     text-align: center;
+    margin-top: 20px;
+    padding-top: 24px;
+    border-top: 4px solid lightgray;
+}
+
+.footer-text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
 
 .contributor {
+    font-family: Arial, Helvetica, sans-serif;
     text-decoration: none;
     font-weight: bold;
     font-size: 20px;
     color: rgb(173, 85, 111);
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .contributor:hover {
