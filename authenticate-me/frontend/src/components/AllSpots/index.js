@@ -39,9 +39,9 @@ const AllSpots = () => {
             </div>
 
             <footer className="ayybne-footer">
-                <a className="footer-text">Made by Saad Anwer |  </a>
+                <a className="footer-text">Made by Saad Anwer | </a>
                 <a className="contributor" href="https://github.com/anwersaad0">GitHub</a>
-                <a className="footer-text">  |  </a>
+                <a className="footer-text"> | </a>
                 <a className="contributor" href="https://www.linkedin.com/in/saad-anwer-01aab317a/">LinkedIn</a>
             </footer>
         </div>
