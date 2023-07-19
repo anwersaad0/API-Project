@@ -116,3 +116,20 @@
 .contributor:hover {
     text-decoration: underline;
 }
+
+.spot-search-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.spot-search-bar {
+    width: 25%;
+    height: 32px;
+    padding: 0px 8px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(238, 238, 238);
+    font-size: 18px;
+}
