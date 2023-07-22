@@ -53,6 +53,9 @@ function ProfileButton({ user }) {
         <li className="profile-content top-divide manage-link-li">
           <NavLink className="manage-link" exact to="/spots/current">Manage Spots</NavLink>
         </li>
+        <li className="profile-content top-divide manage-link-li">
+          <NavLink className="manage-link" exact to="/bookings/current">Manage Bookings</NavLink>
+        </li>
         <li className="logout-li">
           <button className="logout-button" onClick={logout}>Log Out</button>
         </li>

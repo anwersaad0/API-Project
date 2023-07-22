@@ -9,6 +9,7 @@ import GetSpot from "./components/GetSpot";
 import AddSpot from "./components/AddSpotForm";
 import UserSpots from "./components/UserSpots";
 import EditSpot from "./components/EditSpotForm";
+import UserBookings from "./components/UserBookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/bookings/current'>
+            <UserBookings />
+          </Route>
           <Route path='/spots/:spotId/update'>
             <EditSpot />
           </Route>
