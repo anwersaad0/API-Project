@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUserBookingsThunk } from "../../store/bookings";
+import "./UserBookings.css";
 
 const UserBookings = () => {
     const dispatch = useDispatch();
