@@ -27,11 +27,7 @@ const bookingReducer = (state = initState, action) => {
     let newState = {...state};
     switch (action.type) {
         case GET_USER_BOOKINGS:
-            const userState = {};
-            action.list.bookings.forEach(booking => {
-                userState[booking.id] = booking
-            });
-
+            const userState = {...action.bookings};
             return userState;
         default:
             return state;
