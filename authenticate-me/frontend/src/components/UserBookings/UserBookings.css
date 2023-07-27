@@ -1,8 +1,13 @@
 .user-bookings-page {
     display: flex;
     flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
 
     /* justify-content: center; */
     align-items: center;
     /* max-width: 100%; */
+}
+
+.user-bookings-div {
+    background-color: lightgray;
 }
