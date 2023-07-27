@@ -26,14 +26,17 @@ const UserBookings = () => {
             <div className="user-bookings-div">
                 {userBookingsList?.map(booking => (
                     <div key={booking.id} className="user-booking">
-                        <div>
-                            <img src={booking.Spot.previewImage} alt={booking.Spot.name}></img>
+                        <div className="user-booking-img-div">
+                            <img className="user-booking-img" src={booking.Spot.previewImage} alt={booking.Spot.name}></img>
                         </div>
-                        <p>{booking.Spot.name}</p>
-                        <p>From {booking.startDate.slice(0, 10)} to {booking.endDate.slice(0, 10)}</p>
+
                         <div>
-                            <button>Edit Booking</button>
-                            <button>Cancel Booking</button>
+                            <p>{booking.Spot.name}</p>
+                            <p>From {booking.startDate.slice(0, 10)} to {booking.endDate.slice(0, 10)}</p>
+                            <div>
+                                <button>Edit Booking</button>
+                                <button>Cancel Booking</button>
+                            </div>
                         </div>
                     </div>
                 ))}
