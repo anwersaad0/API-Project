@@ -24,7 +24,7 @@ Live Site: [AyyBnE](https://saads-auth-me.onrender.com)
 ### How to run locally
 
 - To run the project locally, open in VSC at the 'authenticate-me' folder.
-- Open two terminals, access the backend folder using ```cd backend``` for one and into the frontend folder using ```cd frontend``` for the other.
+- Open two terminals, access the backend folder using ```cd authenticate-me/backend``` for one and into the frontend folder using ```cd authenticate-me/frontend``` for the other.
 - Run ```npm install``` in each terminal to install their respective dependencies
 - Afterwards, run ```npm start``` in the backend terminal first and then again in the frontend terminal, and the application should run in your browser via localhost
 
