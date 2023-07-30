@@ -26,6 +26,7 @@
 .user-booking-img-div {
     width: 200px;
     height: 120px;
+    border-right: 2px solid rgb(231, 93, 42);
 }
 
 .user-booking-img {
@@ -34,4 +35,35 @@
     
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
+}
+
+.user-booking-link {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.user-booking-link:hover {
+    text-decoration: underline;
+}
+
+.user-booking-details-div {
+    margin-left: 8px;
+}
+
+.booking-del-btn, .booking-edit-btn {
+    background-color: darkgray;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 6px;
+    color: white;
+    width: 68px;
+}
+
+.booking-del-btn {
+    margin-left: 4px;
+}
+
+.booking-del-btn:hover, .booking-edit-btn:hover {
+    background-color: rgb(187, 186, 186);
 }

@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUserBookingsThunk } from "../../store/bookings";
+import { Link } from "react-router-dom";
 import "./UserBookings.css";
 
 const UserBookings = () => {
@@ -30,12 +31,15 @@ const UserBookings = () => {
                             <img className="user-booking-img" src={booking.Spot.previewImage} alt={booking.Spot.name}></img>
                         </div>
 
-                        <div>
-                            <p>{booking.Spot.name}</p>
-                            <p>From {booking.startDate.slice(0, 10)} to {booking.endDate.slice(0, 10)}</p>
-                            <div>
-                                <button>Edit Booking</button>
-                                <button>Cancel Booking</button>
+                        <div className="user-booking-details-div">
+                            <Link className="user-booking-link" to={`/spots/${booking.Spot.id}`}>
+                                <p>{booking.Spot.name}</p>
+                            </Link>
+                            
+                            <p>Period: {booking.startDate.slice(0, 10)} - {booking.endDate.slice(0, 10)}</p>
+                            <div className="user-booking-ui-div">
+                                <button className="booking-edit-btn">Edit</button>
+                                <button className="booking-del-btn">Cancel</button>
                             </div>
                         </div>
                     </div>
