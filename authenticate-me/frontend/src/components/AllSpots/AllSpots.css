@@ -1,0 +1,135 @@
+
+.spots-div {
+    display: grid;
+    grid-template-columns: repeat(4, 360px);
+    margin-left: auto;
+    margin-right: auto;
+    height: inherit;
+    max-width: 1440px;
+    min-width: 740px;
+    height: 100%;
+    background-color: white;
+}
+
+@media (max-width: 1429px) {
+    .spots-div {
+        display: grid;
+        grid-template-columns: repeat(3, 360px);
+        max-width: 1085px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 1079px) {
+    .spots-div {
+        display: grid;
+        grid-template-columns: repeat(2, 360px);
+        justify-content: center;
+        max-width: 740px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 739px) {
+    .spots-div {
+        display: grid;
+        grid-template-columns: repeat(1, 360px);
+        justify-content: center;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.spot-preview {
+    border: 4px solid rgb(196, 96, 59);
+    border-radius: 16px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.spot-preview:hover {
+    border: 4px solid rgb(240, 83, 25);
+}
+
+.spot-img-div {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 254px;
+    justify-content: center;
+    background-color: lightgray;
+}
+
+.spot-img {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    width: 100%;
+    height: 250px;
+}
+
+.details-part-1 {
+    display: flex;
+    justify-content: space-between;
+    max-height: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.preview-star {
+    color: orange;
+    margin-right: 4px;
+}
+
+.spot-preview-price {
+    margin-left: 10px;
+}
+
+.ayybne-footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 24px;
+    border-top: 4px solid lightgray;
+}
+
+.footer-text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.contributor {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(173, 85, 111);
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.contributor:hover {
+    text-decoration: underline;
+}
+
+.spot-search-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.spot-search-bar {
+    width: 25%;
+    height: 32px;
+    padding: 0px 8px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(238, 238, 238);
+    font-size: 18px;
+}

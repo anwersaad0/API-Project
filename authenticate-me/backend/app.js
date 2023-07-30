@@ -45,15 +45,8 @@ app.use(
 // backend/app.js
 const routes = require('./routes');
 
-// ...
-
 app.use(routes); // Connect all the routes
 
-// backend/app.js
-// ...
-
-// backend/app.js
-// ...
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
     const err = new Error("The requested resource couldn't be found.");
@@ -73,17 +66,16 @@ app.use((err, _req, _res, next) => {
     next(err);
 });
 
-// backend/app.js
-// ...
 // Error formatter
 app.use((err, _req, res, _next) => {
     res.status(err.status || 500);
     console.error(err);
     res.json({
-      title: err.title || 'Server Error',
+      //title: err.title || 'Server Error',
       message: err.message,
+      statusCode: err.status,
       errors: err.errors,
-      stack: isProduction ? null : err.stack
+      //stack: isProduction ? null : err.stack
     });
 });
 

@@ -1,0 +1,45 @@
+.details-part-2 {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.main-manage-ui {
+    /* display: inline-flex; */
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 200px;
+    max-width: 1440px;
+    min-width: 740px;
+}
+
+.manage-ui {
+    margin-top: 16px;
+}
+
+.delete-spot-modal-button {
+    margin-left: 8px;
+    background-color: darkgray;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 6px;
+    color: white;
+    width: 68px;
+}
+
+.update-spot-link {
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 13.2px;
+    padding: 1px 10px;
+    margin-left: 8px;
+    background-color: darkgray;
+    border-bottom: 1px solid black;
+    border-radius: 6px;
+    color: white;
+    width: 68px;
+}
+
+.update-spot-link:hover, .delete-spot-modal-button:hover {
+    background-color: rgb(187, 186, 186);
+}
