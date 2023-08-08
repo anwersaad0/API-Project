@@ -49,6 +49,9 @@ const bookingReducer = (state = initState, action) => {
         case GET_USER_BOOKINGS:
             const userState = {...action.bookings};
             return userState;
+        case CREATE_BOOKING:
+            newState[action.payload.id] = action.payload;
+            return newState;
         default:
             return state;
     }
