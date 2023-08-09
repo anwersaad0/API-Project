@@ -11,9 +11,24 @@ const CreateBooking = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const payload = {
+            startDate: startDate,
+            endDate: endDate
+        }
+
+        //let createdBooking = await dispatch(createBookingThunk)
+    }
+
     return (
         <div>
-            <p>WIP</p>
+            
+            <h2>Book a stay for this Spot?</h2>
+            <form className="add-book-details" onSubmit={handleSubmit}>
+
+            </form>
         </div>
     )
 }
