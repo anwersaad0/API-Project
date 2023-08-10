@@ -10,6 +10,7 @@ const CreateReview = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
+    
     const specSpotObj = useSelector(state => state.spots.specSpot);
     const sessionUser = useSelector(state => state.session.user);
 
