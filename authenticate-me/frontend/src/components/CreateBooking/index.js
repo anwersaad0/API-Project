@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
 
 const CreateBooking = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { closeModal } = useModal();
 
     const specSpotObj = useSelector(state => state.spots.specSpot);
     const sessionUser = useSelector(state => state.session.user);
@@ -25,6 +27,7 @@ const CreateBooking = () => {
         let createdBooking = await dispatch(createBookingThunk(specSpotObj.id, payload));
 
         if (createdBooking) {
+            closeModal();
             history.push(`/bookings/current`);
         }
     }
@@ -35,6 +38,7 @@ const CreateBooking = () => {
             <h2>Book a stay for this Spot?</h2>
             <form className="add-book-details" onSubmit={handleSubmit}>
                 <div>
+                    <div><label for="start-date">Start Date:</label></div>
                     <input 
                         className="start-date-input"
                         type="date"
@@ -45,6 +49,7 @@ const CreateBooking = () => {
                 </div>
 
                 <div>
+                    <div><label for="end-date">End Date:</label></div>
                     <input 
                         className="end-date-input"
                         type="date"
@@ -61,3 +66,5 @@ const CreateBooking = () => {
         </div>
     )
 }
+
+export default CreateBooking;

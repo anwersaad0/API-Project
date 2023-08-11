@@ -6,11 +6,10 @@
 }
 
 .main-manage-ui {
-    /* display: inline-flex; */
+    display: flex;
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 200px;
-    max-width: 1440px;
-    min-width: 740px;
+    
+    justify-content: center;
 }
 
 .manage-ui {

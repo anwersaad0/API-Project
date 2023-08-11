@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import { getOneSpotThunk } from "../../store/spots";
 import { useParams } from "react-router-dom";
 import SpotReviews from "../SpotReviews";
+import CreateBooking from "../CreateBooking";
 import './GetSpot.css';
+import OpenModalButton from "../OpenModalButton";
 
 const GetSpot = () => {
     const dispatch = useDispatch();
@@ -59,7 +61,7 @@ const GetSpot = () => {
                     </div>
 
                     <div className="reserve-button-div">
-                        <button className="reserve-button" onClick={reserveAlert}>Reserve</button>
+                        <OpenModalButton buttonClass="reserve-button" buttonText="Reserve" modalComponent={<CreateBooking />} />
                     </div>
                 </div>
             </div>
