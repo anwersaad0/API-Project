@@ -16,6 +16,8 @@ const CreateBooking = () => {
     const [startDate, setStartDate] = useState(Date());
     const [endDate, setEndDate] = useState(Date());
 
+    console.log(specSpotObj);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -28,7 +30,7 @@ const CreateBooking = () => {
 
         if (createdBooking) {
             closeModal();
-            history.push(`/bookings/current`);
+            history.push('/bookings/current');
         }
     }
 

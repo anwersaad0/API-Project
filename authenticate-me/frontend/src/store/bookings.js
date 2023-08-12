@@ -38,6 +38,7 @@ export const createBookingThunk = (spotId, payload) => async dispatch => {
 
     const newBooking = await res.json();
     dispatch(createBooking(newBooking));
+    console.log('book', newBooking);
     return newBooking;
 }
 
@@ -50,7 +51,7 @@ const bookingReducer = (state = initState, action) => {
             const userState = {...action.bookings};
             return userState;
         case CREATE_BOOKING:
-            newState[action.payload.id] = action.payload;
+            newState[action.newBook.id] = action.newBook;
             return newState;
         default:
             return state;
