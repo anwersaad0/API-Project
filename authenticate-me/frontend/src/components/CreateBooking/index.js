@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import './CreateBooking.css';
 
 const CreateBooking = () => {
     const dispatch = useDispatch();
@@ -37,28 +38,30 @@ const CreateBooking = () => {
     return (
         <div className="create-booking-modal">
             
-            <h2>Book a stay for this Spot?</h2>
+            <h2 className="add-book-title">Book a stay for this Spot?</h2>
             <form className="add-book-details" onSubmit={handleSubmit}>
-                <div>
-                    <div><label for="start-date">Start Date:</label></div>
-                    <input 
-                        className="start-date-input"
-                        type="date"
-                        name="start-date"
-                        value={startDate}
-                        onChange={e => setStartDate(e.target.value)}
-                    />
-                </div>
+                <div className="add-book-main-ui">
+                    <div>
+                        <div><label for="start-date">Start Date:</label></div>
+                        <input 
+                            className="start-date-input"
+                            type="date"
+                            name="start-date"
+                            value={startDate}
+                            onChange={e => setStartDate(e.target.value)}
+                        />
+                    </div>
 
-                <div>
-                    <div><label for="end-date">End Date:</label></div>
-                    <input 
-                        className="end-date-input"
-                        type="date"
-                        name="end-date"
-                        value={endDate}
-                        onChange={e => setEndDate(e.target.value)}
-                    />
+                    <div>
+                        <div><label for="end-date">End Date:</label></div>
+                        <input 
+                            className="end-date-input"
+                            type="date"
+                            name="end-date"
+                            value={endDate}
+                            onChange={e => setEndDate(e.target.value)}
+                        />
+                    </div>
                 </div>
 
                 <div>
