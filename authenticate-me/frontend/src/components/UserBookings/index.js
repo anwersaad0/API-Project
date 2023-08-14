@@ -7,15 +7,15 @@ import "./UserBookings.css";
 const UserBookings = () => {
     const dispatch = useDispatch();
 
-    const userBookings = useSelector(state => Object.values(state.bookings));
+    const userBookings = useSelector(state => state.bookings);
     const sessionUser = useSelector(state => state.session.user);
-    const userBookingsList = userBookings[0];
+    const userBookingsList = userBookings.Bookings;
 
     useEffect(() => {
         dispatch(getUserBookingsThunk());
     }, [dispatch]);
 
-    console.log('test', userBookings);
+    console.log('test', userBookingsList);
 
     if (!userBookings) {
         return null;
@@ -28,15 +28,15 @@ const UserBookings = () => {
                 {userBookingsList?.map(booking => (
                     <div key={booking.id} className="user-booking">
                         <div className="user-booking-img-div">
-                            <img className="user-booking-img" src={booking.Spot.previewImage} alt={booking.Spot.name}></img>
+                            <img className="user-booking-img" src={booking?.Spot.previewImage} alt={booking?.Spot.name}></img>
                         </div>
 
                         <div className="user-booking-details-div">
-                            <Link className="user-booking-link" to={`/spots/${booking.Spot.id}`}>
-                                <p>{booking.Spot.name}</p>
+                            <Link className="user-booking-link" to={`/spots/${booking?.Spot.id}`}>
+                                <p>{booking?.Spot.name}</p>
                             </Link>
                             
-                            <p>Period: {booking.startDate.slice(0, 10)} - {booking.endDate.slice(0, 10)}</p>
+                            <p>Period: {booking?.startDate.slice(0, 10)} - {booking?.endDate.slice(0, 10)}</p>
                             <div className="user-booking-ui-div">
                                 <button className="booking-edit-btn">Edit</button>
                                 <button className="booking-del-btn">Cancel</button>
