@@ -14,3 +14,23 @@
     display: flex;
     justify-content: center;
 }
+
+.start-date-ui {
+    margin-right: 28px;
+}
+
+.add-book-submit-ui {
+    display: flex;
+    justify-content: center;
+    margin: 12px 0px;
+}
+
+.submit-create-booking {
+    width: 80%;
+    padding: 8px 16px;
+    color: white;
+    background-color: rgb(230, 45, 45);
+    border: none;
+    border-bottom: 2px solid gray;
+    border-radius: 6px;
+}

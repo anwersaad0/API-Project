@@ -41,7 +41,7 @@ const CreateBooking = () => {
             <h2 className="add-book-title">Book a stay for this Spot?</h2>
             <form className="add-book-details" onSubmit={handleSubmit}>
                 <div className="add-book-main-ui">
-                    <div>
+                    <div className="start-date-ui">
                         <div><label for="start-date">Start Date:</label></div>
                         <input 
                             className="start-date-input"
@@ -64,7 +64,7 @@ const CreateBooking = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className="add-book-submit-ui">
                     <button className="submit-create-booking" type="submit">Create Booking</button>
                 </div>
             </form>
