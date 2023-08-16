@@ -39,6 +39,17 @@ const CreateBooking = () => {
         <div className="create-booking-modal">
             
             <h2 className="add-book-title">Book a stay for this Spot?</h2>
+
+            <div className="add-book-spot-details">
+                <div className="add-book-spot-img-div">
+                    <img className="add-book-spot-img" src={specSpotObj?.SpotImages[0].url} alt="Spot Image" />
+                </div>
+                <div className="add-book-spot-text">
+                    <h3>{specSpotObj.name}</h3>
+                    <h4>Hosted by {specSpotObj.Owner.firstName} {specSpotObj.Owner.lastName}</h4>
+                </div>
+            </div>
+
             <form className="add-book-details" onSubmit={handleSubmit}>
                 <div className="add-book-main-ui">
                     <div className="start-date-ui">

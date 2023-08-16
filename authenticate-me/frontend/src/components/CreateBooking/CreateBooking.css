@@ -10,27 +10,57 @@
     text-align: center;
 }
 
+.add-book-spot-details {
+    margin-top: 24px;
+    margin-bottom: 6px;
+
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+
+    flex-direction: column;
+}
+
+.add-book-spot-img-div {
+    width: 200px;
+    height: 120px;
+}
+
+.add-book-spot-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.add-book-spot-text {
+    text-align: center;
+}
+
 .add-book-main-ui {
     display: flex;
     justify-content: center;
 }
 
 .start-date-ui {
-    margin-right: 28px;
+    margin-right: 40px;
 }
 
 .add-book-submit-ui {
     display: flex;
     justify-content: center;
-    margin: 12px 0px;
+    margin: 16px 0px;
 }
 
 .submit-create-booking {
-    width: 80%;
+    width: 50%;
     padding: 8px 16px;
     color: white;
     background-color: rgb(230, 45, 45);
     border: none;
     border-bottom: 2px solid gray;
     border-radius: 6px;
+}
+
+.submit-create-booking:hover {
+    background-color: rgb(250, 43, 43);
 }
