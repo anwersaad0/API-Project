@@ -64,3 +64,7 @@
 .submit-create-booking:hover {
     background-color: rgb(250, 43, 43);
 }
+
+.submit-create-booking:disabled, .submit-create-booking:disabled:hover {
+    background-color: rgb(112, 112, 112);
+}

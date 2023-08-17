@@ -17,10 +17,11 @@ const CreateBooking = () => {
     const [startDate, setStartDate] = useState(Date());
     const [endDate, setEndDate] = useState(Date());
 
-    console.log(specSpotObj);
+    // const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // setErrors([]);
 
         const payload = {
             startDate: startDate,
@@ -33,6 +34,14 @@ const CreateBooking = () => {
             closeModal();
             history.push('/bookings/current');
         }
+    }
+
+    if (!sessionUser) {
+        return (
+            <div className="create-booking-modal">
+                <h2 className="add-book-title">You must be logged in to book for a Spot!</h2>
+            </div>
+        )
     }
 
     return (
@@ -76,7 +85,7 @@ const CreateBooking = () => {
                 </div>
 
                 <div className="add-book-submit-ui">
-                    <button className="submit-create-booking" type="submit">Create Booking</button>
+                    <button className="submit-create-booking" type="submit" >Create Booking</button>
                 </div>
             </form>
         </div>
