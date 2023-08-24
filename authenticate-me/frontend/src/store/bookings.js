@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_USER_BOOKINGS = "bookings/getUserBookings";
 const CREATE_BOOKING = "bookings/createBooking";
+const EDIT_BOOKING = "bookings/editBooking";
 
 //actions
 
@@ -18,6 +19,13 @@ const createBooking = (newBook) => {
         newBook
     }
 }
+
+// const editBooking = (booking) => {
+//     return {
+//         type: EDIT_BOOKING,
+//         booking
+//     }
+// }
 
 //thunks
 
@@ -41,6 +49,20 @@ export const createBookingThunk = (spotId, payload) => async dispatch => {
     console.log('book', newBooking);
     return newBooking;
 }
+
+export const editBookingThunk = (booking) => async dispatch => {
+    const res = await csrfFetch(`/api/bookings/${booking.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(booking)
+    });
+
+    const editedBooking = await res.json();
+    dispatch(createBooking(editedBooking));
+    return editedBooking;
+}
+
+//reducer
 
 const initState = {};
 
