@@ -1,10 +1,18 @@
 import { csrfFetch } from "./csrf";
 
+//const GET_ONE_BOOKING = "bookings/getOneBooking";
 const GET_USER_BOOKINGS = "bookings/getUserBookings";
 const CREATE_BOOKING = "bookings/createBooking";
-const EDIT_BOOKING = "bookings/editBooking";
+const DELETE_BOOKING = "bookings/deleteBooking";
 
 //actions
+
+// const getSingleBooking = (booking) => {
+//     return {
+//         type: GET_ONE_BOOKING,
+//         booking
+//     }
+// }
 
 const getUserBookings = (bookings) => {
     return {
@@ -20,12 +28,12 @@ const createBooking = (newBook) => {
     }
 }
 
-// const editBooking = (booking) => {
-//     return {
-//         type: EDIT_BOOKING,
-//         booking
-//     }
-// }
+const deleteBooking = (booking) => {
+    return {
+        type: DELETE_BOOKING,
+        booking
+    }
+}
 
 //thunks
 
